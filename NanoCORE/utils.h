@@ -1,6 +1,6 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include "Nano.h"
+#include "Nano_v9.h"
 #include "Math/VectorUtil.h"
 #include "TVector3.h"
 #include "TLorentzVector.h"
@@ -27,6 +27,6 @@ double deltaR(LorentzVector *v1 , LorentzVector v2);
 double deltaR(LorentzVector *v1 , LorentzVector *v2);
 void clear_branches();
 vector<vector<int>> categorise( vector<int> electrons, vector<int> muons, vector<int> taus, vector<int> isoTracks );
-
+vector<float> get_TauSFs( string year, TString tau_vs_obj, float pt, float eta );
 #endif
 

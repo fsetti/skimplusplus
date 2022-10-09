@@ -516,18 +516,20 @@ void clear_branches(){
 	lep1_tightID			= -9;
 	lep1_id_vs_e			= -9;
 	lep1_id_vs_m			= -9;
-	lep1_id_vs_jet			= -9;
+	lep1_id_vs_jet		= -9;
+	lep1_dm						= -1;
 
-	lep2_pt        			= -9;
-	lep2_eta       			= -9;
+	lep2_pt        		= -9;
+	lep2_eta       		= -9;
 	lep2_eta_bdt			= -9;
-	lep2_phi       			= -9;
-	lep2_charge    			= -9;
-	lep2_pdgID     			= -9;
-	lep2_tightID   			= -9;
-	lep2_id_vs_e   			= -9;
-	lep2_id_vs_m   			= -9;
-	lep2_id_vs_jet 			= -9;
+	lep2_phi       		= -9;
+	lep2_charge    		= -9;
+	lep2_pdgID     		= -9;
+	lep2_tightID   		= -9;
+	lep2_id_vs_e   		= -9;
+	lep2_id_vs_m   		= -9;
+	lep2_id_vs_jet 		= -9;
+	lep2_dm						= -1;
 
 	jet1_pt					= -9;
 	jet1_eta				= -9;
@@ -614,4 +616,297 @@ void clear_branches(){
 	mX						= -9;
 	m_llg_lead			= -9;
 	m_llg_subl			= -9;
+
+	Tau_sfDeepTau2017v2p1VSjet_Loose_ext.clear();
+	Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext.clear();  	
+	Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext.clear();
+	Tau_sfDeepTau2017v2p1VSmu_VLoose_ext.clear();
+	Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext.clear();
+	Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext.clear();
+	Tau_sfDeepTau2017v2p1VSe_VVLoose_ext.clear();
+	Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext.clear();
+	Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext.clear();
+
+}
+
+vector<float> get_TauSFs( TString tau_vs_obj, string year, float pt, float eta ){
+
+	vector<float> corrections;
+
+	if ( tau_vs_obj == "e" ){
+		if ( year == "2016_APV" ){
+			if ( eta <= 1.5 ){
+				corrections.push_back(	ele_eta0to1p4_2016pre);
+				corrections.push_back(	ele_eta0to1p4_up_2016pre);
+				corrections.push_back(	ele_eta0to1p4_down_2016pre );
+			}
+			else {
+				corrections.push_back(	ele_eta1p5toInf_2016pre);
+				corrections.push_back(	ele_eta1p5toInf_up_2016pre);
+				corrections.push_back(	ele_eta1p5toInf_down_2016pre );
+			}
+		}
+		else if ( year == "2016" ){
+			if ( eta <= 1.5 ){
+				corrections.push_back(	ele_eta0to1p4_2016post);
+				corrections.push_back(	ele_eta0to1p4_up_2016post);
+				corrections.push_back(	ele_eta0to1p4_down_2016post );
+			}
+			else {
+				corrections.push_back(	ele_eta1p5toInf_2016post);
+				corrections.push_back(	ele_eta1p5toInf_up_2016post);
+				corrections.push_back(	ele_eta1p5toInf_down_2016post );
+			}
+		}
+		else if ( year == "2017" ){
+			if ( eta <= 1.5 ){
+				corrections.push_back(	ele_eta0to1p4_2017);
+				corrections.push_back(	ele_eta0to1p4_up_2017);
+				corrections.push_back(	ele_eta0to1p4_down_2017 );
+			}
+			else {
+				corrections.push_back(	ele_eta1p5toInf_2017);
+				corrections.push_back(	ele_eta1p5toInf_up_2017);
+				corrections.push_back(	ele_eta1p5toInf_down_2017 );
+			}
+		}
+		else if ( year == "2018" ){
+			if ( eta <= 1.5 ){
+				corrections.push_back(	ele_eta0to1p4_2018);
+				corrections.push_back(	ele_eta0to1p4_up_2018);
+				corrections.push_back(	ele_eta0to1p4_down_2018 );
+			}
+			else {
+				corrections.push_back(	ele_eta1p5toInf_2018);
+				corrections.push_back(	ele_eta1p5toInf_up_2018);
+				corrections.push_back(	ele_eta1p5toInf_down_2018 );
+			}
+		}
+	}
+
+	if ( tau_vs_obj == "mu" ){
+		if ( year == "2016_APV" ){
+			if ( eta < 0.4 ){
+				corrections.push_back( mu_eta0to0p4_2016pre				);	
+				corrections.push_back( mu_eta0to0p4_up_2016pre		);	
+				corrections.push_back( mu_eta0to0p4_down_2016pre	);	
+			}
+			else if ( eta < 0.8 ){
+				corrections.push_back( mu_eta0p4to0p8_2016pre				);	
+				corrections.push_back( mu_eta0p4to0p8_up_2016pre		);	
+				corrections.push_back( mu_eta0p4to0p8_down_2016pre	);	
+			}
+			else if ( eta < 1.2 ){
+				corrections.push_back( mu_eta0p8to1p2_2016pre				);	
+				corrections.push_back( mu_eta0p8to1p2_up_2016pre		);	
+				corrections.push_back( mu_eta0p8to1p2_down_2016pre	);	
+			}
+			else if ( eta < 1.7 ){
+				corrections.push_back( mu_eta1p2to1p7_2016pre				);	
+				corrections.push_back( mu_eta1p2to1p7_up_2016pre		);	
+				corrections.push_back( mu_eta1p2to1p7_down_2016pre	);	
+			}
+			else {
+				corrections.push_back( mu_eta1p7toInf_2016pre				);	
+				corrections.push_back( mu_eta1p7toInf_up_2016pre		);	
+				corrections.push_back( mu_eta1p7toInf_down_2016pre	);	
+			}
+		}
+		else if ( year == "2016" ){
+			if ( eta < 0.4 ){
+				corrections.push_back( mu_eta0to0p4_2016post				);	
+				corrections.push_back( mu_eta0to0p4_up_2016post		);	
+				corrections.push_back( mu_eta0to0p4_down_2016post	);	
+			}
+			else if ( eta < 0.8 ){
+				corrections.push_back( mu_eta0p4to0p8_2016post				);	
+				corrections.push_back( mu_eta0p4to0p8_up_2016post		);	
+				corrections.push_back( mu_eta0p4to0p8_down_2016post	);	
+			}
+			else if ( eta < 1.2 ){
+				corrections.push_back( mu_eta0p8to1p2_2016post				);	
+				corrections.push_back( mu_eta0p8to1p2_up_2016post		);	
+				corrections.push_back( mu_eta0p8to1p2_down_2016post	);	
+			}
+			else if ( eta < 1.7 ){
+				corrections.push_back( mu_eta1p2to1p7_2016post				);	
+				corrections.push_back( mu_eta1p2to1p7_up_2016post		);	
+				corrections.push_back( mu_eta1p2to1p7_down_2016post	);	
+			}
+			else {
+				corrections.push_back( mu_eta1p7toInf_2016post				);	
+				corrections.push_back( mu_eta1p7toInf_up_2016post		);	
+				corrections.push_back( mu_eta1p7toInf_down_2016post	);	
+			}
+		}
+		else if ( year == "2017" ){
+			if ( eta < 0.4 ){
+				corrections.push_back( mu_eta0to0p4_2017				);	
+				corrections.push_back( mu_eta0to0p4_up_2017		);	
+				corrections.push_back( mu_eta0to0p4_down_2017	);	
+			}
+			else if ( eta < 0.8 ){
+				corrections.push_back( mu_eta0p4to0p8_2017				);	
+				corrections.push_back( mu_eta0p4to0p8_up_2017		);	
+				corrections.push_back( mu_eta0p4to0p8_down_2017	);	
+			}
+			else if ( eta < 1.2 ){
+				corrections.push_back( mu_eta0p8to1p2_2017				);	
+				corrections.push_back( mu_eta0p8to1p2_up_2017		);	
+				corrections.push_back( mu_eta0p8to1p2_down_2017	);	
+			}
+			else if ( eta < 1.7 ){
+				corrections.push_back( mu_eta1p2to1p7_2017				);	
+				corrections.push_back( mu_eta1p2to1p7_up_2017		);	
+				corrections.push_back( mu_eta1p2to1p7_down_2017	);	
+			}
+			else {
+				corrections.push_back( mu_eta1p7toInf_2017				);	
+				corrections.push_back( mu_eta1p7toInf_up_2017		);	
+				corrections.push_back( mu_eta1p7toInf_down_2017	);	
+			}
+		}
+		else if ( year == "2018" ){
+			if ( eta < 0.4 ){
+				corrections.push_back( mu_eta0to0p4_2018				);	
+				corrections.push_back( mu_eta0to0p4_up_2018		);	
+				corrections.push_back( mu_eta0to0p4_down_2018	);	
+			}
+			else if ( eta < 0.8 ){
+				corrections.push_back( mu_eta0p4to0p8_2018				);	
+				corrections.push_back( mu_eta0p4to0p8_up_2018		);	
+				corrections.push_back( mu_eta0p4to0p8_down_2018	);	
+			}
+			else if ( eta < 1.2 ){
+				corrections.push_back( mu_eta0p8to1p2_2018				);	
+				corrections.push_back( mu_eta0p8to1p2_up_2018		);	
+				corrections.push_back( mu_eta0p8to1p2_down_2018	);	
+			}
+			else if ( eta < 1.7 ){
+				corrections.push_back( mu_eta1p2to1p7_2018				);	
+				corrections.push_back( mu_eta1p2to1p7_up_2018		);	
+				corrections.push_back( mu_eta1p2to1p7_down_2018	);	
+			}
+			else {
+				corrections.push_back( mu_eta1p7toInf_2018				);	
+				corrections.push_back( mu_eta1p7toInf_up_2018		);	
+				corrections.push_back( mu_eta1p7toInf_down_2018	);	
+			}
+		}
+	}
+
+	if ( tau_vs_obj == "jet" ){
+		if ( year == "2016_APV" ){
+			if ( pt < 25 ){
+				corrections.push_back( jet_pT20to25_2016pre 			);	
+				corrections.push_back( jet_pT20to25_up_2016pre 		);	
+				corrections.push_back( jet_pT20to25_down_2016pre	);	
+			}
+			else if ( pt < 30 ){
+				corrections.push_back( jet_pT25to30_2016pre 			);	
+				corrections.push_back( jet_pT25to30_up_2016pre 		);	
+				corrections.push_back( jet_pT25to30_down_2016pre	);	
+			}
+			else if ( pt < 35 ){
+				corrections.push_back( jet_pT30to35_2016pre 			);	
+				corrections.push_back( jet_pT30to35_up_2016pre 		);	
+				corrections.push_back( jet_pT30to35_down_2016pre	);	
+			}
+			else if ( pt < 40 ){
+				corrections.push_back( jet_pT35to40_2016pre 			);	
+				corrections.push_back( jet_pT35to40_up_2016pre 		);	
+				corrections.push_back( jet_pT35to40_down_2016pre	);	
+			}
+			else {
+				corrections.push_back( jet_pT40toInf_2016pre 			);	
+				corrections.push_back( jet_pT40toInf_up_2016pre 		);	
+				corrections.push_back( jet_pT40toInf_down_2016pre	);	
+			}
+		}
+		else if ( year == "2016" ){
+			if ( pt < 25 ){
+				corrections.push_back( jet_pT20to25_2016post 			);	
+				corrections.push_back( jet_pT20to25_up_2016post 		);	
+				corrections.push_back( jet_pT20to25_down_2016post	);	
+			}
+			else if ( pt < 30 ){
+				corrections.push_back( jet_pT25to30_2016post 			);	
+				corrections.push_back( jet_pT25to30_up_2016post 		);	
+				corrections.push_back( jet_pT25to30_down_2016post	);	
+			}
+			else if ( pt < 35 ){
+				corrections.push_back( jet_pT30to35_2016post 			);	
+				corrections.push_back( jet_pT30to35_up_2016post 		);	
+				corrections.push_back( jet_pT30to35_down_2016post	);	
+			}
+			else if ( pt < 40 ){
+				corrections.push_back( jet_pT35to40_2016post 			);	
+				corrections.push_back( jet_pT35to40_up_2016post 		);	
+				corrections.push_back( jet_pT35to40_down_2016post	);	
+			}
+			else {
+				corrections.push_back( jet_pT40toInf_2016post 			);	
+				corrections.push_back( jet_pT40toInf_up_2016post 		);	
+				corrections.push_back( jet_pT40toInf_down_2016post	);	
+			}
+		}
+		else if ( year == "2017" ){
+			if ( pt < 25 ){
+				corrections.push_back( jet_pT20to25_2017 			);	
+				corrections.push_back( jet_pT20to25_up_2017 		);	
+				corrections.push_back( jet_pT20to25_down_2017	);	
+			}
+			else if ( pt < 30 ){
+				corrections.push_back( jet_pT25to30_2017 			);	
+				corrections.push_back( jet_pT25to30_up_2017 		);	
+				corrections.push_back( jet_pT25to30_down_2017	);	
+			}
+			else if ( pt < 35 ){
+				corrections.push_back( jet_pT30to35_2017 			);	
+				corrections.push_back( jet_pT30to35_up_2017 		);	
+				corrections.push_back( jet_pT30to35_down_2017	);	
+			}
+			else if ( pt < 40 ){
+				corrections.push_back( jet_pT35to40_2017 			);	
+				corrections.push_back( jet_pT35to40_up_2017 		);	
+				corrections.push_back( jet_pT35to40_down_2017	);	
+			}
+			else {
+				corrections.push_back( jet_pT40toInf_2017 			);	
+				corrections.push_back( jet_pT40toInf_up_2017 		);	
+				corrections.push_back( jet_pT40toInf_down_2017	);	
+			}
+		}
+		else if ( year == "2018" ){
+			if ( pt < 25 ){
+				corrections.push_back( jet_pT20to25_2018 			);	
+				corrections.push_back( jet_pT20to25_up_2018 		);	
+				corrections.push_back( jet_pT20to25_down_2018	);	
+			}
+			else if ( pt < 30 ){
+				corrections.push_back( jet_pT25to30_2018 			);	
+				corrections.push_back( jet_pT25to30_up_2018 		);	
+				corrections.push_back( jet_pT25to30_down_2018	);	
+			}
+			else if ( pt < 35 ){
+				corrections.push_back( jet_pT30to35_2018 			);	
+				corrections.push_back( jet_pT30to35_up_2018 		);	
+				corrections.push_back( jet_pT30to35_down_2018	);	
+			}
+			else if ( pt < 40 ){
+				corrections.push_back( jet_pT35to40_2018 			);	
+				corrections.push_back( jet_pT35to40_up_2018 		);	
+				corrections.push_back( jet_pT35to40_down_2018	);	
+			}
+			else {
+				corrections.push_back( jet_pT40toInf_2018 			);	
+				corrections.push_back( jet_pT40toInf_up_2018 		);	
+				corrections.push_back( jet_pT40toInf_down_2018	);	
+			}
+		}
+	}
+
+	if (corrections.size() != 3) cout << "Error in computing Tau SFs!!!!!!!!!" << endl;
+
+	return corrections;
 }

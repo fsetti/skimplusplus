@@ -178,6 +178,16 @@ TBranch *b_eta_tautau_vis_bdt		;
 TBranch *b_phi_tautau_vis				;
 TBranch *b_dZ										;
 
+//Add systematic variations
+TBranch *b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext			;
+TBranch *b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext		;
+TBranch *b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext	;
+TBranch *b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext			;
+TBranch *b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext		;
+TBranch *b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext	;
+TBranch *b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext			;
+TBranch *b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext		;
+TBranch *b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext	;
 
 void fill_branches(){
 
@@ -316,6 +326,16 @@ void fill_branches(){
 	b_phi_tautau_vis->Fill();
 	b_dZ->Fill();
 
+	b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext->Fill();	
+
 }
 
 int ScanChain( TChain *ch, string proc, string str_year, string date, float scale_factor = 1, int process_ID=-9999, bool resonant = false ) {
@@ -339,9 +359,9 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  	int idx = 0;
   while ( (currentFile = (TFile*)fileIter.Next()) ) {
 
-     TFile *file = TFile::Open( currentFile->GetTitle() );
-     TTree *tree = (TTree*)file->Get("Events");
-     TTree *runs = (TTree*)file->Get("Runs");
+    TFile *file = TFile::Open( currentFile->GetTitle() );
+    TTree *tree = (TTree*)file->Get("Events");
+    TTree *runs = (TTree*)file->Get("Runs");
 
  		tree->SetBranchStatus("*", 0);
  		tree->SetBranchStatus("Photon_*", 1);
@@ -353,22 +373,23 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		tree->SetBranchStatus("fixedGridRho*", 1);
  		tree->SetBranchStatus("MET_*", 1);
  		tree->SetBranchStatus("HLT_*", 1);
-			if ( proc != "Data" ){
- 			tree->SetBranchStatus("genWeight", 1);			
- 			tree->SetBranchStatus("GenPart_*", 1);
- 			tree->SetBranchStatus("*eight*", 1);			
- 			//add systematics
- 			tree->SetBranchStatus("Pileup*", 1);
- 			//tree->SetBranchStatus("puWeight*", 1);
- 			tree->SetBranchStatus("*sf*", 1);
- 			tree->SetBranchStatus("*SF*", 1);
- 			tree->SetBranchStatus("*igma*", 1);
- 			tree->SetBranchStatus("*cale*", 1);
- 			tree->SetBranchStatus("*Up*", 1);
- 			tree->SetBranchStatus("*up*", 1);
- 			tree->SetBranchStatus("*Down*", 1);
- 			//tree->SetBranchStatus("*down*", 1);
- 			tree->SetBranchStatus("*entral*", 1);
+ 		tree->SetBranchStatus("Flag_*", 1);
+		if ( proc != "Data" ){
+ 		tree->SetBranchStatus("genWeight", 1);			
+ 		tree->SetBranchStatus("GenPart_*", 1);
+ 		tree->SetBranchStatus("*eight*", 1);			
+ 		//add systematics
+ 		tree->SetBranchStatus("Pileup*", 1);
+ 		tree->SetBranchStatus("puWeight*", 1);
+ 		tree->SetBranchStatus("*sf*", 1);
+ 		tree->SetBranchStatus("*SF*", 1);
+ 		tree->SetBranchStatus("*igma*", 1);
+ 		tree->SetBranchStatus("*cale*", 1);
+ 		tree->SetBranchStatus("*Up*", 1);
+ 		tree->SetBranchStatus("*up*", 1);
+ 		tree->SetBranchStatus("*Down*", 1);
+ 		//tree->SetBranchStatus("*down*", 1);
+ 		tree->SetBranchStatus("*entral*", 1);
  		}
  		tree->SetBranchStatus("event", 1);
  		tree->SetBranchStatus("luminosityBlock", 1);
@@ -376,23 +397,23 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 
  		TString file_name = "/ceph/cms/store/user/fsetti/c++_looper_ul_output/" + date + "/" + proc + "/" + proc + "_" + std::to_string(idx) + "_" + str_year + ".root";
  		TFile* f1 = new TFile(file_name, "RECREATE");
- 		H1(mgg, 60, 100 , 180 );
- 		H1(mgg_1t0l, 60, 100 , 180 );
- 		H1(mgg_1t1l, 60, 100 , 180 );
- 		H1(mgg_2t0l, 60, 100 , 180 );
- 		H1(mgg_0t2l, 60, 100 , 180 );
- 		H1(mgg_1t0l_iso, 60, 100 , 180 );
+ 		//H1(mgg, 60, 100 , 180 );
+ 		//H1(mgg_1t0l, 60, 100 , 180 );
+ 		//H1(mgg_1t1l, 60, 100 , 180 );
+ 		//H1(mgg_2t0l, 60, 100 , 180 );
+ 		//H1(mgg_0t2l, 60, 100 , 180 );
+ 		//H1(mgg_1t0l_iso, 60, 100 , 180 );
  	
  		TTree *runs_tree	=	new TTree("Runs","Runs");
  		runs_tree = runs->CloneTree(-1,"fast");
  		TTree *out_tree	=	new TTree("Events","Events");
  		out_tree = tree->CloneTree(-1, "fast");
 
-     out_tree->SetCacheSize(128*1024*1024);
-     out_tree->SetCacheLearnEntries(100);
+    out_tree->SetCacheSize(128*1024*1024);
+    out_tree->SetCacheLearnEntries(100);
 
  		nt.SetYear(year);
-     nt.Init(out_tree);
+    nt.Init(out_tree);
 
  		b_year										=	out_tree->Branch("year"										,	&year					,	"year/I"			);
  		b_process_id							=	out_tree->Branch("process_id"							,	&process_id				,	"process_id/I"		);
@@ -529,12 +550,22 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		b_phi_tautau_vis					=	out_tree->Branch("phi_tautau_vis"					,	&phi_tautau_vis				, 	"phi_tautau_vis/F"			);	  
  		b_dZ											=	out_tree->Branch("dZ"											,	&dZ  						, 	"dZ/F"						);	  
 
-     for( unsigned int loop_event = 0; loop_event < out_tree->GetEntriesFast(); ++loop_event) {
+ 		b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_Loose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_Loose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLoose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLoose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext, 32000,0);
 
-				nt.GetEntry(loop_event);
+    for( unsigned int loop_event = 0; loop_event < out_tree->GetEntriesFast(); ++loop_event) {
 
-				nEventsTotal++;
-				bar.progress(nEventsTotal, nEventsChain);
+			nt.GetEntry(loop_event);
+
+			nEventsTotal++;
+			bar.progress(nEventsTotal, nEventsChain);
  			clear_branches();
  	
  	 		float weight = 1.;
@@ -545,7 +576,18 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  	 		t_MET_pt		= MET_pt();
  	 		t_MET_phi		= MET_phi();
  	 		t_weight		= weight;
- 
+
+			//Load Tau SFs
+			Tau_sfDeepTau2017v2p1VSjet_Loose_ext  		=  Tau_sfDeepTau2017v2p1VSjet_Loose()  	;
+			Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSjet_LooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext  =  Tau_sfDeepTau2017v2p1VSjet_LooseDown()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLoose_ext  		=  Tau_sfDeepTau2017v2p1VSmu_VLoose()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSmu_VLooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSmu_VLooseDown()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLoose_ext  		=  Tau_sfDeepTau2017v2p1VSe_VVLoose()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSe_VVLooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSe_VVLooseDown()  	;
+
  			if ( ggf_samples && ( fabs(genWeight()) >= 0.5 ) ){
  	 			t_weight = -99999;
  				fill_branches();
@@ -654,17 +696,45 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  					if ( deltaR( Tau_p4().at(i) , Muon_p4().at(sel_muons.at(j)) ) < tau_dR_lep ) overlap = true;
  				}
  
- 				if ( !overlap ) sel_taus.push_back(i);
+ 				if ( !overlap ){
+					sel_taus.push_back(i);
+					//ADD Tau SFs for tau decay Mode 5,6
+					if ( Tau_decayMode()[i] == 5 || Tau_decayMode()[i] == 6 ){
+						//Correction vs Jet
+						vector<float> jet_corr;
+						jet_corr = get_TauSFs( "jet", str_year, Tau_pt().at(i), 	 fabs(Tau_eta().at(i)) );
+
+						Tau_sfDeepTau2017v2p1VSjet_Loose_ext.at(i)			= jet_corr.at(0)	;
+						Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext.at(i)		= jet_corr.at(1)	;
+						Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext.at(i)	= jet_corr.at(2)	;
+
+						//Correction vs Muon
+						vector<float> mu_corr;
+						mu_corr = get_TauSFs( "mu", str_year, Tau_pt().at(i), fabs(Tau_eta().at(i)) );
+
+						Tau_sfDeepTau2017v2p1VSmu_VLoose_ext.at(i) 			= mu_corr.at(0);
+						Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext.at(i) 		= mu_corr.at(1);
+						Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext.at(i) 	= mu_corr.at(2);
+
+						//Correction vs Ele
+						vector<float> ele_corr;
+						ele_corr = get_TauSFs( "e", str_year, Tau_pt().at(i), fabs(Tau_eta().at(i)) );
+
+						Tau_sfDeepTau2017v2p1VSe_VVLoose_ext.at(i)			=	ele_corr.at(0);
+						Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext.at(i)		=	ele_corr.at(1);
+						Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext.at(i)	=	ele_corr.at(2);
+					}
+ 				}
  			}
- 		}
+		}
  
  		//Isolated Tracks selection
-           vector<int> sel_isoTracks;
-           for (unsigned int i=0; i<nIsoTrack(); i++){
-               if ( IsoTrack_isPFcand().at(i) && IsoTrack_fromPV().at(i) 
- 								&&	fabs(IsoTrack_dxy().at(i)) < 0.2
- 								&&	fabs(IsoTrack_dz().at(i)) < 0.1
- 								){
+     vector<int> sel_isoTracks;
+     for (unsigned int i=0; i<nIsoTrack(); i++){
+         if ( IsoTrack_isPFcand().at(i) && IsoTrack_fromPV().at(i) 
+ 					&&	fabs(IsoTrack_dxy().at(i)) < 0.2
+ 					&&	fabs(IsoTrack_dz().at(i)) < 0.1
+ 					){
                    LorentzVector *iso_track = new LorentzVector;
                    iso_track->SetXYZT( IsoTrack_pt().at(i)* TMath::Cos(IsoTrack_phi().at(i)) , IsoTrack_pt().at(i)*TMath::Sin( IsoTrack_phi().at(i)), IsoTrack_pt().at(i)*TMath::SinH( IsoTrack_eta().at(i)),  IsoTrack_pt().at(i)*TMath::CosH( IsoTrack_eta().at(i) ) );
                    if ( deltaR( iso_track , Photon_p4().at(gHidx[0]) ) > isoTrk_dR  && deltaR( iso_track , Photon_p4().at(gHidx[1]) ) > isoTrk_dR  ){
@@ -1144,12 +1214,12 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
   		}
  
   		//make histograms for yields
-  		h_mgg->Fill( mgg, weight );
-  		if ( cat1 || cat2 ) h_mgg_1t1l->Fill( mgg, weight );
-  		if ( cat3 ) h_mgg_2t0l->Fill( mgg, weight );
-  		if ( cat4 || cat5 || cat6 ) h_mgg_0t2l->Fill( mgg, weight );
-  		if ( cat7 ) h_mgg_1t0l_iso->Fill( mgg, weight );
-  		if ( cat8 ) h_mgg_1t0l->Fill( mgg, weight );
+  		//h_mgg->Fill( mgg, weight );
+  		//if ( cat1 || cat2 ) h_mgg_1t1l->Fill( mgg, weight );
+  		//if ( cat3 ) h_mgg_2t0l->Fill( mgg, weight );
+  		//if ( cat4 || cat5 || cat6 ) h_mgg_0t2l->Fill( mgg, weight );
+  		//if ( cat7 ) h_mgg_1t0l_iso->Fill( mgg, weight );
+  		//if ( cat8 ) h_mgg_1t0l->Fill( mgg, weight );
 
  		fill_branches();	
  } // Event loop
