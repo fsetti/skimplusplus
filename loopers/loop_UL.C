@@ -49,9 +49,9 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
   if ( str_year == "2016_APV") year = 2016;
   else { year = stoi(str_year); }
 
-  TString file_name = proc + "_28Apr2022_POGsel_" +  str_year;
+  TString file_name = proc + "_TauPOG_check_TauDMinSR_" +  str_year;
 
-	TFile* f1 = new TFile("outputs_UL/" + file_name + ".root", "RECREATE");
+	TFile* f1 = new TFile("/ceph/cms/store/user/fsetti/c++_output_no_skim++/" + file_name + ".root", "RECREATE");
 	H1(mgg, 60, 100 , 180 );
 	H1(mgg_1t0l, 60, 100 , 180 );
 	H1(mgg_1t1l, 60, 100 , 180 );
@@ -145,6 +145,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 	out_tree->Branch("lep1_id_vs_e"			,	&lep1_id_vs_e			, 	"lep1_id_vs_e/I");	  
 	out_tree->Branch("lep1_id_vs_m"			,	&lep1_id_vs_m			,  	"lep1_id_vs_m/I");
 	out_tree->Branch("lep1_id_vs_jet"		,	&lep1_id_vs_jet			,	"lep1_id_vs_jet/I");
+	out_tree->Branch("lep1_dm"					,	&lep1_dm						,	"lep1_dm/I"						);
 	out_tree->Branch("lep2_pt"				,	&lep2_pt				, 	"lep2_pt/F"					);	  
 	out_tree->Branch("lep2_eta"				,	&lep2_eta				,  	"lep2_eta/F"				);
 	out_tree->Branch("lep2_eta_bdt"			,	&lep2_eta_bdt			,  	"lep2_eta_bdt/F"			);
@@ -155,6 +156,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 	out_tree->Branch("lep2_id_vs_e"			,	&lep2_id_vs_e			, 	"lep2_id_vs_e/I"			);	  
 	out_tree->Branch("lep2_id_vs_m"			,	&lep2_id_vs_m			,  	"lep2_id_vs_m/I"			);
 	out_tree->Branch("lep2_id_vs_jet"		,	&lep2_id_vs_jet			,	"lep2_id_vs_jet/I"			);
+	out_tree->Branch("lep2_dm"					,	&lep2_dm						,	"lep2_dm/I"						);
 	out_tree->Branch("lep2_pfRelIso03_all"	,	&lep2_pfRelIso03_all	,	"lep2_pfRelIso03_all/F"		);
 	out_tree->Branch("lep2_pfRelIso03_chg"	,	&lep2_pfRelIso03_chg	,	"lep2_pfRelIso03_chg/F"		);
 
@@ -173,14 +175,14 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 
 	out_tree->Branch("max_bTag"				,	&max_bTag				, 	"max_bTag/F"				);	  
 
-	out_tree->Branch("tau1_pt_SVFit"		,	&tau1_pt_SVFit			,	"tau1_pt_SVFit/F"			);	  
-	out_tree->Branch("tau1_eta_SVFit"		,	&tau1_eta_SVFit			,	"tau1_eta_SVFit/F"			);	  
-	out_tree->Branch("tau1_phi_SVFit"		,	&tau1_phi_SVFit			,	"tau1_phi_SVFit/F"			);	  
-	out_tree->Branch("tau1_m_SVFit"			,	&tau1_m_SVFit			,	"tau1_m_SVFit/F"			);	  
-	out_tree->Branch("tau2_pt_SVFit"		,	&tau2_pt_SVFit			,	"tau2_pt_SVFit/F"			);	  
-	out_tree->Branch("tau2_eta_SVFit"		,	&tau2_eta_SVFit			,	"tau2_eta_SVFit/F"			);	  
-	out_tree->Branch("tau2_phi_SVFit"		,	&tau2_phi_SVFit			,	"tau2_phi_SVFit/F"			);	  
-	out_tree->Branch("tau2_m_SVFit"			,	&tau2_m_SVFit			,	"tau2_m_SVFit/F"			);	  
+	out_tree->Branch("tau1_pt_SVFit"		,	&tau1_pt_SVFit			,	"tau1_pt_SVFit/F"			);
+	out_tree->Branch("tau1_eta_SVFit"		,	&tau1_eta_SVFit			,	"tau1_eta_SVFit/F"			);
+	out_tree->Branch("tau1_phi_SVFit"		,	&tau1_phi_SVFit			,	"tau1_phi_SVFit/F"			);
+	out_tree->Branch("tau1_m_SVFit"			,	&tau1_m_SVFit				,	"tau1_m_SVFit/F"			);
+	out_tree->Branch("tau2_pt_SVFit"		,	&tau2_pt_SVFit			,	"tau2_pt_SVFit/F"			);
+	out_tree->Branch("tau2_eta_SVFit"		,	&tau2_eta_SVFit			,	"tau2_eta_SVFit/F"			);
+	out_tree->Branch("tau2_phi_SVFit"		,	&tau2_phi_SVFit			,	"tau2_phi_SVFit/F"			);
+	out_tree->Branch("tau2_m_SVFit"			,	&tau2_m_SVFit				,	"tau2_m_SVFit/F"			);
 
 	out_tree->Branch("pt_tautau_SVFit"		,	&pt_tautauSVFitLoose		,	"pt_tautau_SVFit/F"			);	  
 	out_tree->Branch("eta_tautau_SVFit"		,	&eta_tautauSVFitLoose		, 	"eta_tautau_SVFit/F"		);	  
@@ -485,8 +487,8 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 
 		vector<classic_svFit::LorentzVector> svFit_res;
 		classic_svFit::LorentzVector diTau_p4, tau1_p4, tau2_p4;
-		float METx	= MET_pt() * TMath::Cos(MET_phi());
-		float METy	= MET_pt() * TMath::Sin(MET_phi());
+		float METx	= MET_T1_pt() * TMath::Cos(MET_T1_phi());
+		float METy	= MET_T1_pt() * TMath::Sin(MET_T1_phi());
 		LorentzVector MET_p4;
 		MET_p4.SetXYZT( METx, METy, 1, 1);
 		//vector<LorentzVector> snt_Mtt_res;
@@ -525,7 +527,16 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 			if ( fabs(IsoTrack_pdgId()[h_cand2[1]]) == 13 ) isoTrk_svfit_code = 1;
 			if ( fabs(IsoTrack_pdgId()[h_cand2[1]]) != 11 && fabs(IsoTrack_pdgId()[h_cand2[1]]) != 13 ) isoTrk_svfit_code = 3;
 			//assuming, if hadronic IsoTrack, one-prong WITH neutral pions (larger Br) and massless
-			svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), 1 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], 0.0, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+			if ( isoTrk_svfit_code < 3 ){
+				svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), -1 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], -1, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+			}
+			else{
+				//How it was initially
+				svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), 1 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], 0.0, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+				//svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), 0 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], 0.13957, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+				//svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), 1 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], 0.13957, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+				//svFit_res = SVfit_all_p4( METx, METy, MET_covXX() , MET_covXY(), MET_covYY(), 2 , Tau_decayMode()[h_cand1[0]] , isoTrk_svfit_code , 3, IsoTrack_pt()[h_cand2[0]], IsoTrack_eta()[h_cand2[0]], IsoTrack_phi()[h_cand2[0]], 0.13957, Tau_pt()[h_cand1[0]], Tau_eta()[h_cand1[0]], Tau_phi()[h_cand1[0]], Tau_mass()[h_cand1[0]] );
+			}
 
 			//ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiM4D<float> > iso_track;
 			//iso_track.SetXYZT( IsoTrack_pt().at(h_cand2[0])* TMath::Cos(IsoTrack_phi().at(h_cand2[0])) , IsoTrack_pt().at(h_cand2[0])*TMath::Sin( IsoTrack_phi().at(h_cand2[0])), IsoTrack_pt().at(h_cand2[0])*TMath::SinH( IsoTrack_eta().at(h_cand2[0])),  IsoTrack_pt().at(h_cand2[0])*TMath::CosH( IsoTrack_eta().at(h_cand2[0]) ) );
@@ -564,10 +575,10 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 	t_run			= run();
 	t_lumiBlock		= luminosityBlock();
 	t_event			= event();
-	t_MET_pt		= MET_pt();
-	t_MET_phi		= MET_phi();
+	t_MET_pt		= MET_T1_pt();
+	t_MET_phi		= MET_T1_phi();
 	t_weight		= weight;
-	MET_gg_dPhi		= deltaPhi( MET_phi() , (Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).phi() );
+	MET_gg_dPhi		= deltaPhi( MET_T1_phi() , (Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).phi() );
 
 	gg_pt			=	(Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).pt() ;
 	gg_ptmgg		=	gg_pt / mgg;
@@ -623,6 +634,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 		lep2_p4			=	Tau_p4()[h_cand1[0]];
 		lep2_pt			=	Tau_pt()[h_cand1[0]];
 		lep2_eta		=	Tau_eta()[h_cand1[0]];
+		lep2_dm			=	Tau_decayMode()[h_cand1[0]];
 		lep2_eta_bdt	=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
 		lep2_phi		=	Tau_phi()[h_cand1[0]];	
 		lep2_charge		=	Tau_charge()[h_cand1[0]];
@@ -646,6 +658,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 		lep2_p4			=	Tau_p4()[h_cand1[0]];
 		lep2_pt			=	Tau_pt()[h_cand1[0]];
 		lep2_eta		=	Tau_eta()[h_cand1[0]];
+		lep2_dm			=	Tau_decayMode()[h_cand1[0]];
 		lep2_eta_bdt	=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
 		lep2_phi		=	Tau_phi()[h_cand1[0]];	
 		lep2_charge		=	Tau_charge()[h_cand1[0]];
@@ -660,6 +673,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 		lep1_p4			=	Tau_p4()[h_cand1[0]];
 		lep1_pt			=	Tau_pt()[h_cand1[0]];
 		lep1_eta		=	Tau_eta()[h_cand1[0]];
+		lep1_dm			=	Tau_decayMode()[h_cand1[0]];
 		lep1_eta_bdt	=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
 		lep1_phi		=	Tau_phi()[h_cand1[0]];	
 		lep1_charge		=	Tau_charge()[h_cand1[0]];
@@ -671,6 +685,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 		lep2_p4			=	Tau_p4()[h_cand2[0]];
 		lep2_pt			=	Tau_pt()[h_cand2[0]];
 		lep2_eta		=	Tau_eta()[h_cand2[0]];
+		lep2_dm			=	Tau_decayMode()[h_cand2[0]];
 		lep2_eta_bdt	=	Tau_eta()[h_cand2[0]] * sgn( gg_eta );
 		lep2_phi		=	Tau_phi()[h_cand2[0]];	
 		lep2_charge		=	Tau_charge()[h_cand2[0]];
@@ -750,6 +765,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 		lep1_p4					=	Tau_p4()[h_cand1[0]];
 		lep1_pt					=	Tau_pt()[h_cand1[0]];
 		lep1_eta				=	Tau_eta()[h_cand1[0]];
+		lep1_dm					=	Tau_decayMode()[h_cand1[0]];
 		lep1_eta_bdt			=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
 		lep1_phi				=	Tau_phi()[h_cand1[0]];	
 		lep1_charge				=	Tau_charge()[h_cand1[0]];
@@ -773,14 +789,15 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 	}
 
 	if ( cat8 ){
-		lep1_pt			=	Tau_pt()[h_cand1[0]];
-		lep1_eta		=	Tau_eta()[h_cand1[0]];
-		lep1_eta_bdt	=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
-		lep1_phi		=	Tau_phi()[h_cand1[0]];	
-		lep1_charge		=	Tau_charge()[h_cand1[0]];
-		lep1_pdgID		=	15 * sgn( lep1_charge );
-		lep1_id_vs_e	=	 (int)Tau_idDeepTau2017v2p1VSe()[h_cand1[0]];	
-		lep1_id_vs_m	=	 (int)Tau_idDeepTau2017v2p1VSmu()[h_cand1[0]];	
+		lep1_pt					=	Tau_pt()[h_cand1[0]];
+		lep1_eta				=	Tau_eta()[h_cand1[0]];
+		lep1_dm					=	Tau_decayMode()[h_cand1[0]];
+		lep1_eta_bdt		=	Tau_eta()[h_cand1[0]] * sgn( gg_eta );
+		lep1_phi				=	Tau_phi()[h_cand1[0]];	
+		lep1_charge			=	Tau_charge()[h_cand1[0]];
+		lep1_pdgID			=	15 * sgn( lep1_charge );
+		lep1_id_vs_e		=	 (int)Tau_idDeepTau2017v2p1VSe()[h_cand1[0]];	
+		lep1_id_vs_m		=	 (int)Tau_idDeepTau2017v2p1VSmu()[h_cand1[0]];	
 		lep1_id_vs_jet	=	(int)Tau_idDeepTau2017v2p1VSjet()[h_cand1[0]];
 	}
 
@@ -800,7 +817,7 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 
 	if ( category < 8 ){
 
-		MET_ll_dPhi							= deltaPhi( MET_phi() , diTau_p4.phi() );
+		MET_ll_dPhi							= deltaPhi( MET_T1_phi() , diTau_p4.phi() );
 
 		lep12_dphi							= deltaPhi( lep2_phi , lep1_phi );
 		lep12_deta							= fabs(lep2_eta - lep1_eta) ;

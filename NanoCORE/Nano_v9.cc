@@ -3940,6 +3940,10 @@ void Nano::Init(TTree *tree) {
     if (b_MET_phi_) { b_MET_phi_->SetAddress(&MET_phi_); }
     b_MET_pt_ = tree->GetBranch("MET_pt");
     if (b_MET_pt_) { b_MET_pt_->SetAddress(&MET_pt_); }
+    b_MET_T1_phi_ = tree->GetBranch("MET_T1_phi");
+    if (b_MET_T1_phi_) { b_MET_T1_phi_->SetAddress(&MET_T1_phi_); }
+    b_MET_T1_pt_ = tree->GetBranch("MET_T1_pt");
+    if (b_MET_T1_pt_) { b_MET_T1_pt_->SetAddress(&MET_T1_pt_); }
     b_MET_significance_ = tree->GetBranch("MET_significance");
     if (b_MET_significance_) { b_MET_significance_->SetAddress(&MET_significance_); }
     b_MET_sumEt_ = tree->GetBranch("MET_sumEt");
@@ -4356,6 +4360,28 @@ void Nano::Init(TTree *tree) {
     if (b_Tau_rawMVAoldDM2017v2_) { b_Tau_rawMVAoldDM2017v2_->SetAddress(&Tau_rawMVAoldDM2017v2_); }
     b_Tau_rawMVAoldDMdR032017v2_ = tree->GetBranch("Tau_rawMVAoldDMdR032017v2");
     if (b_Tau_rawMVAoldDMdR032017v2_) { b_Tau_rawMVAoldDMdR032017v2_->SetAddress(&Tau_rawMVAoldDMdR032017v2_); }
+		//add Tau SFs for mode 5,6
+    b_Tau_sfDeepTau2017v2p1VSjet_Loose_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSjet_Loose");
+    if (b_Tau_sfDeepTau2017v2p1VSjet_Loose_) { b_Tau_sfDeepTau2017v2p1VSjet_Loose_->SetAddress(&Tau_sfDeepTau2017v2p1VSjet_Loose_); }
+    b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSjet_LooseUp");
+    if (b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_) { b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_->SetAddress(&Tau_sfDeepTau2017v2p1VSjet_LooseUp_); }
+    b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSjet_LooseDown");
+    if (b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_) { b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_->SetAddress(&Tau_sfDeepTau2017v2p1VSjet_LooseDown_); }
+
+    b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSmu_VLoose");
+    if (b_Tau_sfDeepTau2017v2p1VSmu_VLoose_) { b_Tau_sfDeepTau2017v2p1VSmu_VLoose_->SetAddress(&Tau_sfDeepTau2017v2p1VSmu_VLoose_); }
+    b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSmu_VLooseUp");
+    if (b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_) { b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_->SetAddress(&Tau_sfDeepTau2017v2p1VSmu_VLooseUp_); }
+    b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSmu_VLooseDown");
+    if (b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_) { b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_->SetAddress(&Tau_sfDeepTau2017v2p1VSmu_VLooseDown_); }
+
+    b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSe_VVLoose");
+    if (b_Tau_sfDeepTau2017v2p1VSe_VVLoose_) { b_Tau_sfDeepTau2017v2p1VSe_VVLoose_->SetAddress(&Tau_sfDeepTau2017v2p1VSe_VVLoose_); }
+    b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSe_VVLooseUp");
+    if (b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_) { b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_->SetAddress(&Tau_sfDeepTau2017v2p1VSe_VVLooseUp_); }
+    b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ = tree->GetBranch("Tau_sfDeepTau2017v2p1VSe_VVLooseDown");
+    if (b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_) { b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_->SetAddress(&Tau_sfDeepTau2017v2p1VSe_VVLooseDown_); }
+
     b_TkMET_phi_ = tree->GetBranch("TkMET_phi");
     if (b_TkMET_phi_) { b_TkMET_phi_->SetAddress(&TkMET_phi_); }
     b_TkMET_pt_ = tree->GetBranch("TkMET_pt");
@@ -6485,6 +6511,8 @@ void Nano::GetEntry(unsigned int idx) {
     loaded_MET_fiducialGenPt_ = false;
     loaded_MET_phi_ = false;
     loaded_MET_pt_ = false;
+    loaded_MET_T1_phi_ = false;
+    loaded_MET_T1_pt_ = false;
     loaded_MET_significance_ = false;
     loaded_MET_sumEt_ = false;
     loaded_MET_sumPtUnclustered_ = false;
@@ -6699,6 +6727,15 @@ void Nano::GetEntry(unsigned int idx) {
     loaded_Tau_rawMVAoldDM2017v1_ = false;
     loaded_Tau_rawMVAoldDM2017v2_ = false;
     loaded_Tau_rawMVAoldDMdR032017v2_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSjet_Loose_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSmu_VLoose_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSe_VVLoose_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ = false;
+    loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ = false;
     loaded_TkMET_phi_ = false;
     loaded_TkMET_pt_ = false;
     loaded_TkMET_sumEt_ = false;
@@ -22897,6 +22934,22 @@ const float &Nano::MET_pt() {
     }
     return MET_pt_;
 }
+const float &Nano::MET_T1_phi() {
+    if (!loaded_MET_T1_phi_) {
+        if (!b_MET_T1_phi_) throw std::runtime_error("MET_T1_phi branch doesn't exist");
+        b_MET_T1_phi_->GetEntry(index);
+        loaded_MET_T1_phi_ = true;
+    }
+    return MET_T1_phi_;
+}
+const float &Nano::MET_T1_pt() {
+    if (!loaded_MET_T1_pt_) {
+        if (!b_MET_T1_pt_) throw std::runtime_error("MET_T1_pt branch doesn't exist");
+        b_MET_T1_pt_->GetEntry(index);
+        loaded_MET_T1_pt_ = true;
+    }
+    return MET_T1_pt_;
+}
 const float &Nano::MET_significance() {
     if (!loaded_MET_significance_) {
         if (!b_MET_significance_) throw std::runtime_error("MET_significance branch doesn't exist");
@@ -24815,6 +24868,95 @@ const vector<float> &Nano::Tau_rawMVAoldDMdR032017v2() {
         loaded_Tau_rawMVAoldDMdR032017v2_ = true;
     }
     return v_Tau_rawMVAoldDMdR032017v2_;
+}
+//Add Tau ID SFs
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSjet_Loose() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSjet_Loose_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSjet_Loose_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSjet_Loose branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSjet_Loose_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSjet_Loose_ = vector<float>(Tau_sfDeepTau2017v2p1VSjet_Loose_,Tau_sfDeepTau2017v2p1VSjet_Loose_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSjet_Loose_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSjet_Loose_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSjet_Loose_;
+}
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSjet_LooseUp() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSjet_LooseUp_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSjet_LooseUp branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ = vector<float>(Tau_sfDeepTau2017v2p1VSjet_LooseUp_,Tau_sfDeepTau2017v2p1VSjet_LooseUp_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSjet_LooseUp_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSjet_LooseUp_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSjet_LooseDown() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSjet_LooseDown_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSjet_LooseDown branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ = vector<float>(Tau_sfDeepTau2017v2p1VSjet_LooseDown_,Tau_sfDeepTau2017v2p1VSjet_LooseDown_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSjet_LooseDown_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSjet_LooseDown_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSmu_VLoose() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSmu_VLoose_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSmu_VLoose_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSmu_VLoose branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSmu_VLoose_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSmu_VLoose_ = vector<float>(Tau_sfDeepTau2017v2p1VSmu_VLoose_,Tau_sfDeepTau2017v2p1VSmu_VLoose_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSmu_VLoose_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSmu_VLoose_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSmu_VLoose_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSmu_VLooseUp() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSmu_VLooseUp branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ = vector<float>(Tau_sfDeepTau2017v2p1VSmu_VLooseUp_,Tau_sfDeepTau2017v2p1VSmu_VLooseUp_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSmu_VLooseUp_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSmu_VLooseDown() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSmu_VLooseDown branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ = vector<float>(Tau_sfDeepTau2017v2p1VSmu_VLooseDown_,Tau_sfDeepTau2017v2p1VSmu_VLooseDown_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSmu_VLooseDown_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSe_VVLoose() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSe_VVLoose_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSe_VVLoose_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSe_VVLoose branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSe_VVLoose_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSe_VVLoose_ = vector<float>(Tau_sfDeepTau2017v2p1VSe_VVLoose_,Tau_sfDeepTau2017v2p1VSe_VVLoose_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSe_VVLoose_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSe_VVLoose_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSe_VVLoose_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSe_VVLooseUp() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSe_VVLooseUp branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ = vector<float>(Tau_sfDeepTau2017v2p1VSe_VVLooseUp_,Tau_sfDeepTau2017v2p1VSe_VVLooseUp_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSe_VVLooseUp_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_;
+}
+
+const vector<float> &Nano::Tau_sfDeepTau2017v2p1VSe_VVLooseDown() {
+    if (!loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_) {
+        if (!b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_) throw std::runtime_error("Tau_sfDeepTau2017v2p1VSe_VVLooseDown branch doesn't exist");
+        int bytes = b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_->GetEntry(index);
+        v_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ = vector<float>(Tau_sfDeepTau2017v2p1VSe_VVLooseDown_,Tau_sfDeepTau2017v2p1VSe_VVLooseDown_+bytes/sizeof(Tau_sfDeepTau2017v2p1VSe_VVLooseDown_[0]));
+        loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ = true;
+    }
+    return v_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_;
 }
 const float &Nano::TkMET_phi() {
     if (!loaded_TkMET_phi_) {
@@ -27286,6 +27428,8 @@ namespace tas {
     const float &MET_fiducialGenPt() { return nt.MET_fiducialGenPt(); }
     const float &MET_phi() { return nt.MET_phi(); }
     const float &MET_pt() { return nt.MET_pt(); }
+    const float &MET_T1_phi() { return nt.MET_T1_phi(); }
+    const float &MET_T1_pt() { return  nt.MET_T1_pt(); }
     const float &MET_significance() { return nt.MET_significance(); }
     const float &MET_sumEt() { return nt.MET_sumEt(); }
     const float &MET_sumPtUnclustered() { return nt.MET_sumPtUnclustered(); }
@@ -27500,6 +27644,15 @@ namespace tas {
     const vector<float> &Tau_rawMVAoldDM2017v1() { return nt.Tau_rawMVAoldDM2017v1(); }
     const vector<float> &Tau_rawMVAoldDM2017v2() { return nt.Tau_rawMVAoldDM2017v2(); }
     const vector<float> &Tau_rawMVAoldDMdR032017v2() { return nt.Tau_rawMVAoldDMdR032017v2(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_Loose() { return nt.Tau_sfDeepTau2017v2p1VSjet_Loose(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseUp() { return nt.Tau_sfDeepTau2017v2p1VSjet_LooseUp(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseDown() { return nt.Tau_sfDeepTau2017v2p1VSjet_LooseDown(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLoose() 		{ return nt.Tau_sfDeepTau2017v2p1VSmu_VLoose(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseUp() 	{ return nt.Tau_sfDeepTau2017v2p1VSmu_VLooseUp(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseDown() { return nt.Tau_sfDeepTau2017v2p1VSmu_VLooseDown(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLoose() 		{ return nt.Tau_sfDeepTau2017v2p1VSe_VVLoose(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseUp() 	{ return nt.Tau_sfDeepTau2017v2p1VSe_VVLooseUp(); }
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseDown() { return nt.Tau_sfDeepTau2017v2p1VSe_VVLooseDown(); }
     const float &TkMET_phi() { return nt.TkMET_phi(); }
     const float &TkMET_pt() { return nt.TkMET_pt(); }
     const float &TkMET_sumEt() { return nt.TkMET_sumEt(); }
@@ -27818,6 +27971,15 @@ namespace tas {
         else if (name == "Tau_rawMVAoldDM2017v1") return nt.Tau_rawMVAoldDM2017v1();
         else if (name == "Tau_rawMVAoldDM2017v2") return nt.Tau_rawMVAoldDM2017v2();
         else if (name == "Tau_rawMVAoldDMdR032017v2") return nt.Tau_rawMVAoldDMdR032017v2();
+        else if (name == "Tau_sfDeepTau2017v2p1VSjet_Loose") 			return nt.Tau_sfDeepTau2017v2p1VSjet_Loose();
+        else if (name == "Tau_sfDeepTau2017v2p1VSjet_LooseUp") 		return nt.Tau_sfDeepTau2017v2p1VSjet_LooseUp();
+        else if (name == "Tau_sfDeepTau2017v2p1VSjet_LooseDown") 	return nt.Tau_sfDeepTau2017v2p1VSjet_LooseDown();
+        else if (name == "Tau_sfDeepTau2017v2p1VSmu_VLoose") 			return nt.Tau_sfDeepTau2017v2p1VSmu_VLoose();
+        else if (name == "Tau_sfDeepTau2017v2p1VSmu_VLooseUp") 		return nt.Tau_sfDeepTau2017v2p1VSmu_VLooseUp();
+        else if (name == "Tau_sfDeepTau2017v2p1VSmu_VLooseDown") 	return nt.Tau_sfDeepTau2017v2p1VSmu_VLooseDown();
+        else if (name == "Tau_sfDeepTau2017v2p1VSe_VVLoose") 			return nt.Tau_sfDeepTau2017v2p1VSe_VVLoose();
+        else if (name == "Tau_sfDeepTau2017v2p1VSe_VVLooseUp") 		return nt.Tau_sfDeepTau2017v2p1VSe_VVLooseUp();
+        else if (name == "Tau_sfDeepTau2017v2p1VSe_VVLooseDown") 	return nt.Tau_sfDeepTau2017v2p1VSe_VVLooseDown();
         else if (name == "TrigObj_eta") return nt.TrigObj_eta();
         else if (name == "TrigObj_l1pt") return nt.TrigObj_l1pt();
         else if (name == "TrigObj_l1pt_2") return nt.TrigObj_l1pt_2();
@@ -27884,6 +28046,8 @@ namespace tas {
         else if (name == "MET_fiducialGenPt") return nt.MET_fiducialGenPt();
         else if (name == "MET_phi") return nt.MET_phi();
         else if (name == "MET_pt") return nt.MET_pt();
+        else if (name == "MET_T1_phi") return nt.MET_T1_phi();
+        else if (name == "MET_T1_pt") return  nt.MET_T1_pt();
         else if (name == "MET_significance") return nt.MET_significance();
         else if (name == "MET_sumEt") return nt.MET_sumEt();
         else if (name == "MET_sumPtUnclustered") return nt.MET_sumPtUnclustered();

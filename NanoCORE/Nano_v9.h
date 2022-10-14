@@ -6239,6 +6239,12 @@ protected:
     float MET_pt_;
     TBranch *b_MET_pt_;
     bool loaded_MET_pt_;
+    float MET_T1_phi_;
+    TBranch *b_MET_T1_phi_;
+    bool loaded_MET_T1_phi_;
+    float MET_T1_pt_;
+    TBranch *b_MET_T1_pt_;
+    bool loaded_MET_T1_pt_;
     float MET_significance_;
     TBranch *b_MET_significance_;
     bool loaded_MET_significance_;
@@ -7052,6 +7058,42 @@ protected:
     vector<float> v_Tau_rawMVAoldDMdR032017v2_;
     TBranch *b_Tau_rawMVAoldDMdR032017v2_;
     bool loaded_Tau_rawMVAoldDMdR032017v2_;
+    float Tau_sfDeepTau2017v2p1VSjet_Loose_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSjet_Loose_;
+    TBranch *b_Tau_sfDeepTau2017v2p1VSjet_Loose_;
+    bool loaded_Tau_sfDeepTau2017v2p1VSjet_Loose_;
+    float Tau_sfDeepTau2017v2p1VSjet_LooseUp_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSjet_LooseUp_;
+    TBranch *b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_;
+    bool loaded_Tau_sfDeepTau2017v2p1VSjet_LooseUp_;
+    float Tau_sfDeepTau2017v2p1VSjet_LooseDown_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSjet_LooseDown_;
+    TBranch *b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_;
+    bool loaded_Tau_sfDeepTau2017v2p1VSjet_LooseDown_;
+    float 					Tau_sfDeepTau2017v2p1VSmu_VLoose_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSmu_VLoose_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSmu_VLoose_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSmu_VLoose_;
+    float 					Tau_sfDeepTau2017v2p1VSmu_VLooseUp_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_;
+    float 					Tau_sfDeepTau2017v2p1VSmu_VLooseDown_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_;
+    float 					Tau_sfDeepTau2017v2p1VSe_VVLoose_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSe_VVLoose_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSe_VVLoose_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSe_VVLoose_;
+    float 					Tau_sfDeepTau2017v2p1VSe_VVLooseUp_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_;
+    float 					Tau_sfDeepTau2017v2p1VSe_VVLooseDown_[NTAU_MAX];
+    vector<float> v_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_;
+    TBranch 		 *b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_;
+    bool 		 loaded_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_;
     float TkMET_phi_;
     TBranch *b_TkMET_phi_;
     bool loaded_TkMET_phi_;
@@ -9232,6 +9274,8 @@ public:
     const float &MET_fiducialGenPt();
     const float &MET_phi();
     const float &MET_pt();
+    const float &MET_T1_phi();
+    const float &MET_T1_pt();
     const float &MET_significance();
     const float &MET_sumEt();
     const float &MET_sumPtUnclustered();
@@ -9446,6 +9490,15 @@ public:
     const vector<float> &Tau_rawMVAoldDM2017v1();
     const vector<float> &Tau_rawMVAoldDM2017v2();
     const vector<float> &Tau_rawMVAoldDMdR032017v2();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_Loose();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseUp();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseDown();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLoose();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseUp();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseDown();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLoose();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseUp();
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseDown();
     const float &TkMET_phi();
     const float &TkMET_pt();
     const float &TkMET_sumEt();
@@ -11494,6 +11547,8 @@ namespace tas {
     const float &MET_fiducialGenPt(); // pt
     const float &MET_phi(); // phi
     const float &MET_pt(); // pt
+    const float &MET_T1_phi(); // phi
+    const float &MET_T1_pt(); // pt
     const float &MET_significance(); // MET significance
     const float &MET_sumEt(); // scalar sum of Et
     const float &MET_sumPtUnclustered(); // sumPt used for MET significance
@@ -11708,6 +11763,15 @@ namespace tas {
     const vector<float> &Tau_rawMVAoldDM2017v1(); // byIsolationMVArun2v1DBoldDMwLT raw output discriminator (2017v1)
     const vector<float> &Tau_rawMVAoldDM2017v2(); // byIsolationMVArun2v1DBoldDMwLT raw output discriminator (2017v2)
     const vector<float> &Tau_rawMVAoldDMdR032017v2(); // byIsolationMVArun2v1DBdR03oldDMwLT raw output discriminator (2017v2)
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_Loose(); 			
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseUp(); 		
+    const vector<float> &Tau_sfDeepTau2017v2p1VSjet_LooseDown(); 	
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLoose(); 			
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseUp(); 		
+    const vector<float> &Tau_sfDeepTau2017v2p1VSmu_VLooseDown(); 	
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLoose(); 			
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseUp(); 		
+    const vector<float> &Tau_sfDeepTau2017v2p1VSe_VVLooseDown(); 	
     const float &TkMET_phi(); // raw track MET phi
     const float &TkMET_pt(); // raw track MET pt
     const float &TkMET_sumEt(); // raw track scalar sum of Et
