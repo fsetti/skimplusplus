@@ -1,4 +1,205 @@
 {
+    "NMSSM_XYH_Y_tautau_H_gg_MX_300_MY_125": {
+        "2016": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_300_MY_125_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2016_APV": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_300_MY_125_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2017": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_300_MY_125_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2018": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_300_MY_125_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "fpo": 10,
+        "process_id": 97,
+        "resonant": true
+    },
+
+    "NMSSM_XYH_Y_tautau_H_gg_MX_500_MY_300": {
+        "2016": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_500_MY_300_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2016_APV": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_500_MY_300_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2017": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_500_MY_300_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2018": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_500_MY_300_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "fpo": 10,
+        "process_id": 98,
+        "resonant": true
+    },
+
+    "NMSSM_XYH_Y_tautau_H_gg_MX_700_MY_500": {
+        "2016": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_700_MY_500_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2016_APV": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_700_MY_500_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2017": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_700_MY_500_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2018": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_700_MY_500_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "fpo": 10,
+        "process_id": 99,
+        "resonant": true
+    },
+
+
+    "NMSSM_XYH_Y_tautau_H_gg_MX_1000_MY_700": {
+        "2016": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_1000_MY_700_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODv2-106X_mcRun2_asymptotic_v17-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2016_APV": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_1000_MY_700_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2017": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_1000_MY_700_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "2018": {
+            "metadata": {
+                "n_events": -1,
+                "scale1fb": 1,
+                "sumWeights": 1,
+                "xs": 1
+            },
+            "paths": [
+                "/ceph/cms/store/user/fsetti/Summer20UL_nanoAODv9/NMSSM_XYH_Y_tautau_H_gg_MX_1000_MY_700_TuneCP5_13TeV-madgraph-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v0/"
+            ]
+        },
+        "fpo": 10,
+        "process_id": 100,
+        "resonant": true
+    },
+
     "HH_ggTauTau": {
         "2016": {
             "metadata": {
@@ -24,13 +225,14 @@
         },
         "2017": {
             "metadata": {
-                "n_events": 379999,
-                "scale1fb": 8.701800045638433e-07,
-                "sumWeights": 10157.668475076413,
+                "n_events": 193998,
+                "scale1fb": 1.7058134817861835e-06,
+                "sumWeights": 5181.6919577541075,
                 "xs": 8.839e-06
+
             },
             "paths": [
-                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017_v2"
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_2017_STEP6_fixBug17_v0_Central"
             ]
         },
         "2018": {
@@ -220,13 +422,13 @@
         },
         "2017": {
             "metadata": {
-                "n_events": 379984,
-                "scale1fb": 2.981989136449671e-07,
-                "sumWeights": 10164.356277999996,
+                "n_events": 191992,
+                "scale1fb": 5.898318234616885e-07,
+                "sumWeights": 5138.752911315022,
                 "xs": 3.031e-06
             },
             "paths": [
-                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2W_dileptonic_node_cHHH1_2017_v2"
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2W_dileptonic_node_cHHH1_2017_STEP6_fixBug17_v0_Central"
             ]
         },
         "2018": {
@@ -416,13 +618,13 @@
         },
         "2017": {
             "metadata": {
-                "n_events": 379744,
-                "scale1fb": 1.285776507423568e-06,
-                "sumWeights": 10159.6194397544,
+                "n_events": 189884,
+                "scale1fb": 2.573330448029005e-06,
+                "sumWeights": 5076.301028499999,
                 "xs": 1.3063e-05
             },
             "paths": [
-                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2W_semileptonic_node_cHHH1_2017_v2"
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2W_semileptonic_node_cHHH1_2017_STEP6_fixBug17_v0_Central"
             ]
         },
         "2018": {
@@ -637,6 +839,7 @@
         "process_id": 3,
         "resonant": false
     },
+
     "GJets_HT-100To200": {
         "2016": {
             "metadata": {
@@ -1538,5 +1741,54 @@
         "fpo": 10,
         "process_id": 0,
         "resonant": false
+    },
+    "HHggTauTau_cen": {
+        "2016": {
+            "metadata": {
+                "n_events": 459205,
+                "scale1fb": 7.208335349361025e-07,
+                "sumWeights": 12262.193102299996,
+                "xs": 8.839e-06
+            },
+            "paths": [
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL16MiniAODv2_Central"
+            ]
+        },
+        "2016_APV": {
+            "metadata": {
+                "n_events": 537768,
+                "scale1fb": 6.141827892351575e-07,
+                "sumWeights": 14391.48109475229,
+                "xs": 8.839e-06
+            },
+            "paths": [
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL16MiniAODAPVv2_Central/"
+            ]
+        },
+        "2017": {
+            "metadata": {
+                "n_events": 990620,
+                "scale1fb": 3.34344607894842e-07,
+                "sumWeights": 26436.7954239,
+                "xs": 8.839e-06
+            },
+            "paths": [
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL17MiniAODv2_Central"
+            ]
+        },
+        "2018": {
+            "metadata": {
+                "n_events": 974000,
+                "scale1fb": 3.395111291129579e-07,
+                "sumWeights": 26034.492663299996,
+                "xs": 8.839e-06
+            },
+            "paths": [
+                "/ceph/cms/store/user/legianni/skimNano-TestUL__TEST-SamplesV9/GluGluToHHTo2G2Tau_node_cHHH1_TuneCP5_13TeV-powheg-pythia8_RunIISummer20UL18MiniAODv2_Central"
+            ]
+        },
+        "fpo": 10,
+        "process_id": -100,
+        "resonant": true
     }
 }
