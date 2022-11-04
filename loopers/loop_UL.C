@@ -49,7 +49,10 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
   if ( str_year == "2016_APV") year = 2016;
   else { year = stoi(str_year); }
 
-  TString file_name = proc + "_TauPOG_check_TauDMinSR_" +  str_year;
+	bool isData = false;
+	if ( process_ID == 0 ) isData = true;
+
+  TString file_name = proc + "_04Nov2022_" +  str_year;
 
 	TFile* f1 = new TFile("/ceph/cms/store/user/fsetti/c++_output_no_skim++/" + file_name + ".root", "RECREATE");
 	H1(mgg, 60, 100 , 180 );
@@ -487,8 +490,17 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 
 		vector<classic_svFit::LorentzVector> svFit_res;
 		classic_svFit::LorentzVector diTau_p4, tau1_p4, tau2_p4;
-		float METx	= MET_T1_pt() * TMath::Cos(MET_T1_phi());
-		float METy	= MET_T1_pt() * TMath::Sin(MET_T1_phi());
+		float METx;
+		float METy;
+		if ( isData ){
+			METx	= MET_pt() * TMath::Cos(MET_phi());
+			METy	= MET_pt() * TMath::Sin(MET_phi());
+		}
+		else{
+			METx	= MET_T1_pt() * TMath::Cos(MET_T1_phi());
+			METy	= MET_T1_pt() * TMath::Sin(MET_T1_phi());
+		}
+
 		LorentzVector MET_p4;
 		MET_p4.SetXYZT( METx, METy, 1, 1);
 		//vector<LorentzVector> snt_Mtt_res;
@@ -575,10 +587,17 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 	t_run			= run();
 	t_lumiBlock		= luminosityBlock();
 	t_event			= event();
-	t_MET_pt		= MET_T1_pt();
-	t_MET_phi		= MET_T1_phi();
+	if (isData){
+		t_MET_pt		= MET_pt();
+		t_MET_phi		= MET_phi();
+		MET_gg_dPhi		= deltaPhi( MET_phi() , (Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).phi() );
+	}
+	else{
+		t_MET_pt		= MET_T1_pt();
+		t_MET_phi		= MET_T1_phi();
+		MET_gg_dPhi		= deltaPhi( MET_T1_phi() , (Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).phi() );
+	}
 	t_weight		= weight;
-	MET_gg_dPhi		= deltaPhi( MET_T1_phi() , (Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).phi() );
 
 	gg_pt			=	(Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1])).pt() ;
 	gg_ptmgg		=	gg_pt / mgg;
@@ -817,7 +836,8 @@ int ScanChain( TChain *ch, string proc, string str_year, float scale_factor = 1,
 
 	if ( category < 8 ){
 
-		MET_ll_dPhi							= deltaPhi( MET_T1_phi() , diTau_p4.phi() );
+		if (isData) { MET_ll_dPhi	= deltaPhi( MET_phi() , diTau_p4.phi() ); }
+		else { MET_ll_dPhi				= deltaPhi( MET_T1_phi() , diTau_p4.phi() ); }
 
 		lep12_dphi							= deltaPhi( lep2_phi , lep1_phi );
 		lep12_deta							= fabs(lep2_eta - lep1_eta) ;
