@@ -220,6 +220,10 @@ TBranch *b_LHEScaleWeight_6;
 TBranch *b_LHEScaleWeight_7;
 TBranch *b_LHEScaleWeight_8;
 
+TBranch *b_LHEPdfWeight_Unit;
+TBranch *b_LHEPdfWeight_Up;
+TBranch *b_LHEPdfWeight_Down;
+
 void fill_branches(bool is_data = false ){
 
 	b_year->Fill();
@@ -397,6 +401,10 @@ void fill_branches(bool is_data = false ){
 		b_LHEScaleWeight_5->Fill();
 		b_LHEScaleWeight_7->Fill();
 		b_LHEScaleWeight_8->Fill();
+
+		b_LHEPdfWeight_Unit->Fill();
+		b_LHEPdfWeight_Up->Fill();
+		b_LHEPdfWeight_Down->Fill();
 	}
 }
 
@@ -657,6 +665,10 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 			b_LHEScaleWeight_6 						= out_tree->Branch("LHEScaleWeight_6"   		, &LHEScaleWeight_6   		, "LHEScaleWeight_6/F");
 			b_LHEScaleWeight_7 						= out_tree->Branch("LHEScaleWeight_7"   		, &LHEScaleWeight_7   		, "LHEScaleWeight_7/F");
 			b_LHEScaleWeight_8 						= out_tree->Branch("LHEScaleWeight_8"   		, &LHEScaleWeight_8   		, "LHEScaleWeight_8/F");
+
+			b_LHEPdfWeight_Unit 					= out_tree->Branch("LHEPdfWeight_Unit"   		, &LHEPdfWeight_Unit   		, "LHEPdfWeight_Unit/F");
+			b_LHEPdfWeight_Up 						= out_tree->Branch("LHEPdfWeight_Up"   			, &LHEPdfWeight_Up   			, "LHEPdfWeight_Up/F");
+			b_LHEPdfWeight_Down 					= out_tree->Branch("LHEPdfWeight_Down"   		, &LHEPdfWeight_Down   		, "LHEPdfWeight_Down/F");
 		}
 
     for( unsigned int loop_event = 0; loop_event < out_tree->GetEntriesFast(); ++loop_event) {
@@ -728,6 +740,27 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				LHEScaleWeight_6					= LHEScaleWeight()[6];
 				LHEScaleWeight_7					= LHEScaleWeight()[7];
 				LHEScaleWeight_8					= LHEScaleWeight()[8];
+
+				//Compute LHE PDF variations
+				LHEPdfWeight_Unit				= 1.;
+				Float_t pdf_delta				= -9;
+				Int_t 	nMem						= 100;
+				Float_t hess_unc 				= 0.;
+				//Float_t mc_unc 				= 0.;
+				Float_t as_unc					= 0.;
+
+				//Alpha Scale uncertainty, easy
+				as_unc = ( LHEPdfWeight()[102] - LHEPdfWeight()[101] ) / 2.;
+
+				//Compute Hessian uncertainty
+				for(unsigned int i=1; i<nMem+1;i++){
+					hess_unc += pow( LHEPdfWeight()[i] - 1, 2 );
+				}
+				hess_unc = TMath::Sqrt( hess_unc );
+
+				pdf_delta = TMath::Sqrt( pow( as_unc, 2) + pow(hess_unc, 2) );
+				LHEPdfWeight_Up				= 1.+pdf_delta;
+				LHEPdfWeight_Down			= 1.-pdf_delta;
 			}
 
  			if ( ggf_samples && ( fabs(genWeight()) >= 0.5 ) ){

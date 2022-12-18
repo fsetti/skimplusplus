@@ -157,14 +157,16 @@ float 			jet1_eta		;
 float 			jet1_eta_bdt	;
 float 			jet1_phi		;
 float 			jet1_bTag		;
-int 			jet1_id			;
+int 				jet1_id			;
+int 				jet1_puId			;
 
 float 			jet2_pt			;
 float 			jet2_eta		;
 float 			jet2_eta_bdt	;
 float 			jet2_phi		;
 float 			jet2_bTag		;
-int 			jet2_id			;
+int 				jet2_id			;
+int 				jet2_puId			;
 
 float			max_bTag		;
 float			tt_hel					;
@@ -269,6 +271,21 @@ vector<float> IsoTrk_SF_ES_50perc;
 vector<float> IsoTrk_SF_ES_50perc_Up;
 vector<float> IsoTrk_SF_ES_50perc_Down;
 
+float LHEScaleWeight_Unit;
+float LHEScaleWeight_0;
+float LHEScaleWeight_1;
+float LHEScaleWeight_2;
+float LHEScaleWeight_3;
+float LHEScaleWeight_4;
+float LHEScaleWeight_5;
+float LHEScaleWeight_6;
+float LHEScaleWeight_7;
+float LHEScaleWeight_8;
+
+float LHEPdfWeight_Unit;
+float LHEPdfWeight_Up;
+float LHEPdfWeight_Down;
+
 //list of SFs for Muon-WP VLoose
 //from 	https://indico.cern.ch/event/866243/contributions/3650016/attachments/1950974/3238736/mutauFRRun2_Yiwen_20191121.pdf
 //and 	https://github.com/cms-tau-pog/TauIDSFs
@@ -277,77 +294,77 @@ vector<float> IsoTrk_SF_ES_50perc_Down;
 //////////////////  2016pre Muon
 //////////////////////////
 float mu_eta0to0p4_2016pre 					= 1.1705;
-float mu_eta0to0p4_up_2016pre 			= mu_eta0to0p4_2016pre + 10*(	+ 0.081 );
-float mu_eta0to0p4_down_2016pre 		= mu_eta0to0p4_2016pre + 10*(	- 0.081 );
+float mu_eta0to0p4_up_2016pre 			= mu_eta0to0p4_2016pre + 2*(	+ 0.081 );
+float mu_eta0to0p4_down_2016pre 		= mu_eta0to0p4_2016pre + 2*(	- 0.081 );
 float mu_eta0p4to0p8_2016pre 				= 1.207;
-float mu_eta0p4to0p8_up_2016pre 		= mu_eta0p4to0p8_2016pre + 10* ( + 0.162 );
-float mu_eta0p4to0p8_down_2016pre 	= mu_eta0p4to0p8_2016pre + 10* ( - 0.128 );
+float mu_eta0p4to0p8_up_2016pre 		= mu_eta0p4to0p8_2016pre + 2* ( + 0.162 );
+float mu_eta0p4to0p8_down_2016pre 	= mu_eta0p4to0p8_2016pre + 2* ( - 0.128 );
 float mu_eta0p8to1p2_2016pre 				= 1.411;
-float mu_eta0p8to1p2_up_2016pre 		= mu_eta0p8to1p2_2016pre + 10* ( + 0.111 );
-float mu_eta0p8to1p2_down_2016pre 	= mu_eta0p8to1p2_2016pre + 10* ( - 0.108 );
+float mu_eta0p8to1p2_up_2016pre 		= mu_eta0p8to1p2_2016pre + 2* ( + 0.111 );
+float mu_eta0p8to1p2_down_2016pre 	= mu_eta0p8to1p2_2016pre + 2* ( - 0.108 );
 float mu_eta1p2to1p7_2016pre 				= 0.8886 ;
-float mu_eta1p2to1p7_up_2016pre 		= mu_eta1p2to1p7_2016pre + 10* ( + 0.190 );
-float mu_eta1p2to1p7_down_2016pre 	= mu_eta1p2to1p7_2016pre + 10* ( - 0.214 );
+float mu_eta1p2to1p7_up_2016pre 		= mu_eta1p2to1p7_2016pre + 2* ( + 0.190 );
+float mu_eta1p2to1p7_down_2016pre 	= mu_eta1p2to1p7_2016pre + 2* ( - 0.214 );
 float mu_eta1p7toInf_2016pre 				= 3.933 ;
-float mu_eta1p7toInf_up_2016pre 		= mu_eta1p7toInf_2016pre + 10* ( + 0.390 );
-float mu_eta1p7toInf_down_2016pre 	= mu_eta1p7toInf_2016pre + 10* ( - 0.361 );
+float mu_eta1p7toInf_up_2016pre 		= mu_eta1p7toInf_2016pre + 2* ( + 0.390 );
+float mu_eta1p7toInf_down_2016pre 	= mu_eta1p7toInf_2016pre + 2* ( - 0.361 );
 
 //////////////////////////
 //////////////////  2016post Muon
 //////////////////////////
 float mu_eta0to0p4_2016post 				= 1.0035;
-float mu_eta0to0p4_up_2016post 			= mu_eta0to0p4_2016post + 10*(	+ 0.081 );
-float mu_eta0to0p4_down_2016post 		= mu_eta0to0p4_2016post + 10*(	- 0.081 );
+float mu_eta0to0p4_up_2016post 			= mu_eta0to0p4_2016post + 2*(	+ 0.081 );
+float mu_eta0to0p4_down_2016post 		= mu_eta0to0p4_2016post + 2*(	- 0.081 );
 float mu_eta0p4to0p8_2016post 			= 1.037;
-float mu_eta0p4to0p8_up_2016post 		= mu_eta0p4to0p8_2016post + 10* ( + 0.162 );
-float mu_eta0p4to0p8_down_2016post 	= mu_eta0p4to0p8_2016post + 10* ( - 0.128 );
+float mu_eta0p4to0p8_up_2016post 		= mu_eta0p4to0p8_2016post + 2* ( + 0.162 );
+float mu_eta0p4to0p8_down_2016post 	= mu_eta0p4to0p8_2016post + 2* ( - 0.128 );
 float mu_eta0p8to1p2_2016post 			= 0.879;
-float mu_eta0p8to1p2_up_2016post 		= mu_eta0p8to1p2_2016post + 10* ( + 0.111 );
-float mu_eta0p8to1p2_down_2016post 	= mu_eta0p8to1p2_2016post + 10* ( - 0.108 );
+float mu_eta0p8to1p2_up_2016post 		= mu_eta0p8to1p2_2016post + 2* ( + 0.111 );
+float mu_eta0p8to1p2_down_2016post 	= mu_eta0p8to1p2_2016post + 2* ( - 0.108 );
 float mu_eta1p2to1p7_2016post 			= 0.947 ;
-float mu_eta1p2to1p7_up_2016post 		= mu_eta1p2to1p7_2016post + 10* ( + 0.190 );
-float mu_eta1p2to1p7_down_2016post 	= mu_eta1p2to1p7_2016post + 10* ( - 0.214 );
+float mu_eta1p2to1p7_up_2016post 		= mu_eta1p2to1p7_2016post + 2* ( + 0.190 );
+float mu_eta1p2to1p7_down_2016post 	= mu_eta1p2to1p7_2016post + 2* ( - 0.214 );
 float mu_eta1p7toInf_2016post 			= 3.551 ;
-float mu_eta1p7toInf_up_2016post 		= mu_eta1p7toInf_2016post + 10* ( + 0.390 );
-float mu_eta1p7toInf_down_2016post 	= mu_eta1p7toInf_2016post + 10* ( - 0.361 );
+float mu_eta1p7toInf_up_2016post 		= mu_eta1p7toInf_2016post + 2* ( + 0.390 );
+float mu_eta1p7toInf_down_2016post 	= mu_eta1p7toInf_2016post + 2* ( - 0.361 );
 
 //////////////////////////
 //////////////////  2017 Muon
 //////////////////////////
 float mu_eta0to0p4_2017 				= 1.2307;
-float mu_eta0to0p4_up_2017 			= mu_eta0to0p4_2017 + 10* (  + 0.088 );
-float mu_eta0to0p4_down_2017 		= mu_eta0to0p4_2017 + 10* (  - 0.087 );
+float mu_eta0to0p4_up_2017 			= mu_eta0to0p4_2017 + 2* (  + 0.088 );
+float mu_eta0to0p4_down_2017 		= mu_eta0to0p4_2017 + 2* (  - 0.087 );
 float mu_eta0p4to0p8_2017 			= 1.1593;
-float mu_eta0p4to0p8_up_2017 		= mu_eta0p4to0p8_2017 + 10* ( + 0.119 );
-float mu_eta0p4to0p8_down_2017 	= mu_eta0p4to0p8_2017 + 10* ( - 0.107 );
+float mu_eta0p4to0p8_up_2017 		= mu_eta0p4to0p8_2017 + 2* ( + 0.119 );
+float mu_eta0p4to0p8_down_2017 	= mu_eta0p4to0p8_2017 + 2* ( - 0.107 );
 float mu_eta0p8to1p2_2017 			= 0.9032             ;
-float mu_eta0p8to1p2_up_2017 		= mu_eta0p8to1p2_2017 + 10* ( + 0.098 );
-float mu_eta0p8to1p2_down_2017 	= mu_eta0p8to1p2_2017 + 10* ( - 0.103 );
+float mu_eta0p8to1p2_up_2017 		= mu_eta0p8to1p2_2017 + 2* ( + 0.098 );
+float mu_eta0p8to1p2_down_2017 	= mu_eta0p8to1p2_2017 + 2* ( - 0.103 );
 float mu_eta1p2to1p7_2017 			= 0.79435     ;
-float mu_eta1p2to1p7_up_2017 		= mu_eta1p2to1p7_2017 + 10* ( + 0.139 );
-float mu_eta1p2to1p7_down_2017 	= mu_eta1p2to1p7_2017 + 10* ( - 0.134 );
+float mu_eta1p2to1p7_up_2017 		= mu_eta1p2to1p7_2017 + 2* ( + 0.139 );
+float mu_eta1p2to1p7_down_2017 	= mu_eta1p2to1p7_2017 + 2* ( - 0.134 );
 float mu_eta1p7toInf_2017 			= 3.11348            ;
-float mu_eta1p7toInf_up_2017 		= mu_eta1p7toInf_2017 + 10* ( + 0.305 );
-float mu_eta1p7toInf_down_2017 	= mu_eta1p7toInf_2017 + 10* ( - 0.284 );
+float mu_eta1p7toInf_up_2017 		= mu_eta1p7toInf_2017 + 2* ( + 0.305 );
+float mu_eta1p7toInf_down_2017 	= mu_eta1p7toInf_2017 + 2* ( - 0.284 );
 
 //////////////////////////
 //////////////////  2018 Muon
 //////////////////////////
 float mu_eta0to0p4_2018 				= 1.2085;
-float mu_eta0to0p4_up_2018 			= mu_eta0to0p4_2018 + 10* ( + 0.08 );
-float mu_eta0to0p4_down_2018 		= mu_eta0to0p4_2018 + 10* ( - 0.08 );
+float mu_eta0to0p4_up_2018 			= mu_eta0to0p4_2018 + 2* ( + 0.08 );
+float mu_eta0to0p4_down_2018 		= mu_eta0to0p4_2018 + 2* ( - 0.08 );
 float mu_eta0p4to0p8_2018 			= 1.02802;
-float mu_eta0p4to0p8_up_2018 		= mu_eta0p4to0p8_2018 + 10* ( + 0.153 );
-float mu_eta0p4to0p8_down_2018 	= mu_eta0p4to0p8_2018 + 10* ( - 0.128 );
+float mu_eta0p4to0p8_up_2018 		= mu_eta0p4to0p8_2018 + 2* ( + 0.153 );
+float mu_eta0p4to0p8_down_2018 	= mu_eta0p4to0p8_2018 + 2* ( - 0.128 );
 float mu_eta0p8to1p2_2018 			= 0.9927             ;
-float mu_eta0p8to1p2_up_2018 		= mu_eta0p8to1p2_2018 + 10* ( + 0.102 );
-float mu_eta0p8to1p2_down_2018 	= mu_eta0p8to1p2_2018 + 10* ( - 0.093 );
+float mu_eta0p8to1p2_up_2018 		= mu_eta0p8to1p2_2018 + 2* ( + 0.102 );
+float mu_eta0p8to1p2_down_2018 	= mu_eta0p8to1p2_2018 + 2* ( - 0.093 );
 float mu_eta1p2to1p7_2018 			= 1.225    ;
-float mu_eta1p2to1p7_up_2018 		= mu_eta1p2to1p7_2018 + 10*(+ 0.160 );
-float mu_eta1p2to1p7_down_2018 	= mu_eta1p2to1p7_2018 + 10*(- 0.150 );
+float mu_eta1p2to1p7_up_2018 		= mu_eta1p2to1p7_2018 + 2*(+ 0.160 );
+float mu_eta1p2to1p7_down_2018 	= mu_eta1p2to1p7_2018 + 2*(- 0.150 );
 float mu_eta1p7toInf_2018 			= 4.8828             ;
-float mu_eta1p7toInf_up_2018 		= mu_eta1p7toInf_2018 + 10*(+ 0.400 );
-float mu_eta1p7toInf_down_2018 	= mu_eta1p7toInf_2018 + 10*(- 0.101 );
+float mu_eta1p7toInf_up_2018 		= mu_eta1p7toInf_2018 + 2*(+ 0.400 );
+float mu_eta1p7toInf_down_2018 	= mu_eta1p7toInf_2018 + 2*(- 0.101 );
 
 //Electron Scale Factors from here
 // 			https://indico.cern.ch/event/831606/contributions/3483937/attachments/1871414/3079821/EtoTauFR2018-updated.pdf
@@ -357,115 +374,115 @@ float mu_eta1p7toInf_down_2018 	= mu_eta1p7toInf_2018 + 10*(- 0.101 );
 //////////////////  2016 Electron
 //////////////////////////
 float ele_eta0to1p4_2016pre 				= 1.12;
-float ele_eta0to1p4_up_2016pre 			= ele_eta0to1p4_2016pre + 10*(+ 0.0017 );
-float ele_eta0to1p4_down_2016pre 		= ele_eta0to1p4_2016pre + 10*(- 0.0017 );
+float ele_eta0to1p4_up_2016pre 			= ele_eta0to1p4_2016pre + 2*(+ 0.0017 );
+float ele_eta0to1p4_down_2016pre 		= ele_eta0to1p4_2016pre + 2*(- 0.0017 );
 float ele_eta1p5toInf_2016pre 			= 1.07;
-float ele_eta1p5toInf_up_2016pre 		= ele_eta1p5toInf_2016pre + 10*(+ 0.016 );
-float ele_eta1p5toInf_down_2016pre 	= ele_eta1p5toInf_2016pre + 10*(- 0.016 );
+float ele_eta1p5toInf_up_2016pre 		= ele_eta1p5toInf_2016pre + 2*(+ 0.016 );
+float ele_eta1p5toInf_down_2016pre 	= ele_eta1p5toInf_2016pre + 2*(- 0.016 );
 
 //////////////////////////
 //////////////////  2016 Electron
 //////////////////////////
 float ele_eta0to1p4_2016post 				= 1.06;
-float ele_eta0to1p4_up_2016post 			= ele_eta0to1p4_2016post + 10*(+ 0.0017 );
-float ele_eta0to1p4_down_2016post 		= ele_eta0to1p4_2016post + 10*(- 0.0017 );
+float ele_eta0to1p4_up_2016post 			= ele_eta0to1p4_2016post + 2*(+ 0.0017 );
+float ele_eta0to1p4_down_2016post 		= ele_eta0to1p4_2016post + 2*(- 0.0017 );
 float ele_eta1p5toInf_2016post 			= 0.95;
-float ele_eta1p5toInf_up_2016post 		= ele_eta1p5toInf_2016post + 10*(+ 0.016 );
-float ele_eta1p5toInf_down_2016post 	= ele_eta1p5toInf_2016post + 10*(- 0.016 );
+float ele_eta1p5toInf_up_2016post 		= ele_eta1p5toInf_2016post + 2*(+ 0.016 );
+float ele_eta1p5toInf_down_2016post 	= ele_eta1p5toInf_2016post + 2*(- 0.016 );
 
 //////////////////////////
 //////////////////  2017 Electron
 //////////////////////////
 float ele_eta0to1p4_2017 				= 0.89;
-float ele_eta0to1p4_up_2017 			= ele_eta0to1p4_2017 + 10*(+ 0.003 );
-float ele_eta0to1p4_down_2017 		= ele_eta0to1p4_2017 + 10*(- 0.004 );
+float ele_eta0to1p4_up_2017 			= ele_eta0to1p4_2017 + 2*(+ 0.003 );
+float ele_eta0to1p4_down_2017 		= ele_eta0to1p4_2017 + 2*(- 0.004 );
 float ele_eta1p5toInf_2017 			= 0.93;
-float ele_eta1p5toInf_up_2017 		= ele_eta1p5toInf_2017 + 10*(+ 0.004 );
-float ele_eta1p5toInf_down_2017 	= ele_eta1p5toInf_2017 + 10*(- 0.004 );
+float ele_eta1p5toInf_up_2017 		= ele_eta1p5toInf_2017 + 2*(+ 0.004 );
+float ele_eta1p5toInf_down_2017 	= ele_eta1p5toInf_2017 + 2*(- 0.004 );
 
 //////////////////////////
 //////////////////  2018 Electron
 //////////////////////////
 float ele_eta0to1p4_2018 				= 0.90;
-float ele_eta0to1p4_up_2018 			= ele_eta0to1p4_2018 + 10*(+ 0.003 );
-float ele_eta0to1p4_down_2018 		= ele_eta0to1p4_2018 + 10*(- 0.003 );
+float ele_eta0to1p4_up_2018 			= ele_eta0to1p4_2018 + 2*(+ 0.003 );
+float ele_eta0to1p4_down_2018 		= ele_eta0to1p4_2018 + 2*(- 0.003 );
 float ele_eta1p5toInf_2018 			= 1.07;
-float ele_eta1p5toInf_up_2018 		= ele_eta1p5toInf_2018 + 10*(+ 0.003 );
-float ele_eta1p5toInf_down_2018 	= ele_eta1p5toInf_2018 + 10*(- 0.003 );
+float ele_eta1p5toInf_up_2018 		= ele_eta1p5toInf_2018 + 2*(+ 0.003 );
+float ele_eta1p5toInf_down_2018 	= ele_eta1p5toInf_2018 + 2*(- 0.003 );
 
 //Jet SFs from https://github.com/cms-tau-pog/TauIDSFs
 //////////////////////////
 //////////////////  2016preVFP Jet
 //////////////////////////
 float jet_pT20to25_2016pre 				= 0.9370219;
-float jet_pT20to25_up_2016pre 		= jet_pT20to25_2016pre + 10*(+ 0.0689 );
-float jet_pT20to25_down_2016pre 	= jet_pT20to25_2016pre + 10*(- 0.0689 );
+float jet_pT20to25_up_2016pre 		= jet_pT20to25_2016pre + 2*(+ 0.0689 );
+float jet_pT20to25_down_2016pre 	= jet_pT20to25_2016pre + 2*(- 0.0689 );
 float jet_pT25to30_2016pre 				= 0.9252694;
-float jet_pT25to30_up_2016pre 		= jet_pT25to30_2016pre + 10*(+ 0.0432 );
-float jet_pT25to30_down_2016pre 	= jet_pT25to30_2016pre + 10*(- 0.0432 );
+float jet_pT25to30_up_2016pre 		= jet_pT25to30_2016pre + 2*(+ 0.0432 );
+float jet_pT25to30_down_2016pre 	= jet_pT25to30_2016pre + 2*(- 0.0432 );
 float jet_pT30to35_2016pre 				= 0.9518583;
-float jet_pT30to35_up_2016pre 		= jet_pT30to35_2016pre + 10*(+ 0.0306 );
-float jet_pT30to35_down_2016pre 	= jet_pT30to35_2016pre + 10*(- 0.0306 );
+float jet_pT30to35_up_2016pre 		= jet_pT30to35_2016pre + 2*(+ 0.0306 );
+float jet_pT30to35_down_2016pre 	= jet_pT30to35_2016pre + 2*(- 0.0306 );
 float jet_pT35to40_2016pre 				= 0.9382482;
-float jet_pT35to40_up_2016pre 		= jet_pT35to40_2016pre + 10*(+ 0.0321 );
-float jet_pT35to40_down_2016pre 	= jet_pT35to40_2016pre + 10*(- 0.0321 );
+float jet_pT35to40_up_2016pre 		= jet_pT35to40_2016pre + 2*(+ 0.0321 );
+float jet_pT35to40_down_2016pre 	= jet_pT35to40_2016pre + 2*(- 0.0321 );
 float jet_pT40toInf_2016pre 			= 0.867371231569;
-float jet_pT40toInf_up_2016pre 		= jet_pT40toInf_2016pre + 10*(+ 0.0489 );
-float jet_pT40toInf_down_2016pre 	= jet_pT40toInf_2016pre + 10*(- 0.0337 );
+float jet_pT40toInf_up_2016pre 		= jet_pT40toInf_2016pre + 2*(+ 0.0489 );
+float jet_pT40toInf_down_2016pre 	= jet_pT40toInf_2016pre + 2*(- 0.0337 );
 
 //////////////////////////
 //////////////////  2016postVFP Jet
 //////////////////////////
 float jet_pT20to25_2016post 			= 0.9148144;
-float jet_pT20to25_up_2016post 		= jet_pT20to25_2016post + 10*(+ 0.0650 );
-float jet_pT20to25_down_2016post 	= jet_pT20to25_2016post + 10*(- 0.065 );
+float jet_pT20to25_up_2016post 		= jet_pT20to25_2016post + 2*(+ 0.0650 );
+float jet_pT20to25_down_2016post 	= jet_pT20to25_2016post + 2*(- 0.065 );
 float jet_pT25to30_2016post 			= 0.9341246;
-float jet_pT25to30_up_2016post 		= jet_pT25to30_2016post + 10*(+ 0.0401 );
-float jet_pT25to30_down_2016post 	= jet_pT25to30_2016post + 10*(- 0.0401 );
+float jet_pT25to30_up_2016post 		= jet_pT25to30_2016post + 2*(+ 0.0401 );
+float jet_pT25to30_down_2016post 	= jet_pT25to30_2016post + 2*(- 0.0401 );
 float jet_pT30to35_2016post 			= 0.9509707;
-float jet_pT30to35_up_2016post 		= jet_pT30to35_2016post + 10*(+ 0.0309 );
-float jet_pT30to35_down_2016post 	= jet_pT30to35_2016post + 10*(- 0.0309 );
+float jet_pT30to35_up_2016post 		= jet_pT30to35_2016post + 2*(+ 0.0309 );
+float jet_pT30to35_down_2016post 	= jet_pT30to35_2016post + 2*(- 0.0309 );
 float jet_pT35to40_2016post 			= 0.9582294;
-float jet_pT35to40_up_2016post 		= jet_pT35to40_2016post + 10*(+ 0.0327 );
-float jet_pT35to40_down_2016post 	= jet_pT35to40_2016post + 10*(- 0.0327 );
+float jet_pT35to40_up_2016post 		= jet_pT35to40_2016post + 2*(+ 0.0327 );
+float jet_pT35to40_down_2016post 	= jet_pT35to40_2016post + 2*(- 0.0327 );
 float jet_pT40toInf_2016post 			= 0.842972195625;
-float jet_pT40toInf_up_2016post 	= jet_pT40toInf_2016post + 10*(+ 0.0673 );
-float jet_pT40toInf_down_2016post = jet_pT40toInf_2016post + 10*(- 0.0349 );
+float jet_pT40toInf_up_2016post 	= jet_pT40toInf_2016post + 2*(+ 0.0673 );
+float jet_pT40toInf_down_2016post = jet_pT40toInf_2016post + 2*(- 0.0349 );
 
 //////////////////////////
 //////////////////  2017 Jet
 //////////////////////////
 float jet_pT20to25_2017 			= 0.901811;
-float jet_pT20to25_up_2017 		= jet_pT20to25_2017 + 10*(+ 0.0613 );
-float jet_pT20to25_down_2017 	= jet_pT20to25_2017 + 10*(- 0.0613 );
+float jet_pT20to25_up_2017 		= jet_pT20to25_2017 + 2*(+ 0.0613 );
+float jet_pT20to25_down_2017 	= jet_pT20to25_2017 + 2*(- 0.0613 );
 float jet_pT25to30_2017 			= 0.907348;
-float jet_pT25to30_up_2017 		= jet_pT25to30_2017 + 10*(+ 0.0323 );
-float jet_pT25to30_down_2017 	= jet_pT25to30_2017 + 10*(- 0.0323 );
+float jet_pT25to30_up_2017 		= jet_pT25to30_2017 + 2*(+ 0.0323 );
+float jet_pT25to30_down_2017 	= jet_pT25to30_2017 + 2*(- 0.0323 );
 float jet_pT30to35_2017 			= 0.9426739;
-float jet_pT30to35_up_2017 		= jet_pT30to35_2017 + 10*(+ 0.028776 );
-float jet_pT30to35_down_2017 	= jet_pT30to35_2017 + 10*(- 0.028776 );
+float jet_pT30to35_up_2017 		= jet_pT30to35_2017 + 2*(+ 0.028776 );
+float jet_pT30to35_down_2017 	= jet_pT30to35_2017 + 2*(- 0.028776 );
 float jet_pT35to40_2017 			= 0.8963103;
-float jet_pT35to40_up_2017 		= jet_pT35to40_2017 + 10*(+ 0.026317 );
-float jet_pT35to40_down_2017 	= jet_pT35to40_2017 + 10*(- 0.026317 );
+float jet_pT35to40_up_2017 		= jet_pT35to40_2017 + 2*(+ 0.026317 );
+float jet_pT35to40_down_2017 	= jet_pT35to40_2017 + 2*(- 0.026317 );
 float jet_pT40toInf_2017 			= 0.883461746353;
-float jet_pT40toInf_up_2017 	= jet_pT40toInf_2017+ 10*( +  0.0284 );
-float jet_pT40toInf_down_2017 = jet_pT40toInf_2017+ 10*( -  0.027698);
+float jet_pT40toInf_up_2017 	= jet_pT40toInf_2017+ 2*( +  0.0284 );
+float jet_pT40toInf_down_2017 = jet_pT40toInf_2017+ 2*( -  0.027698);
 
 //////////////////////////
 //////////////////  2018 Jet
 //////////////////////////
 float jet_pT20to25_2018 			= 0.8838565;
-float jet_pT20to25_up_2018 		= jet_pT20to25_2018 + 10*(+ 0.05432 );
-float jet_pT20to25_down_2018 	= jet_pT20to25_2018 + 10*(- 0.05432 );
+float jet_pT20to25_up_2018 		= jet_pT20to25_2018 + 2*(+ 0.05432 );
+float jet_pT20to25_down_2018 	= jet_pT20to25_2018 + 2*(- 0.05432 );
 float jet_pT25to30_2018 			= 0.8882092;
-float jet_pT25to30_up_2018 		= jet_pT25to30_2018 + 10*(+  0.036946 );
-float jet_pT25to30_down_2018 	= jet_pT25to30_2018 + 10*(-  0.036946 );
+float jet_pT25to30_up_2018 		= jet_pT25to30_2018 + 2*(+  0.036946 );
+float jet_pT25to30_down_2018 	= jet_pT25to30_2018 + 2*(-  0.036946 );
 float jet_pT30to35_2018 			= 0.9241967;
-float jet_pT30to35_up_2018 		= jet_pT30to35_2018 + 10*(+ 0.0270 );
-float jet_pT30to35_down_2018 	= jet_pT30to35_2018 + 10*(- 0.0270 );
+float jet_pT30to35_up_2018 		= jet_pT30to35_2018 + 2*(+ 0.0270 );
+float jet_pT30to35_down_2018 	= jet_pT30to35_2018 + 2*(- 0.0270 );
 float jet_pT35to40_2018 			= 0.9135042;
-float jet_pT35to40_up_2018 		= jet_pT35to40_2018 + 10*(+ 0.026734 );
-float jet_pT35to40_down_2018 	= jet_pT35to40_2018 + 10*(- 0.026734 );
+float jet_pT35to40_up_2018 		= jet_pT35to40_2018 + 2*(+ 0.026734 );
+float jet_pT35to40_down_2018 	= jet_pT35to40_2018 + 2*(- 0.026734 );
 float jet_pT40toInf_2018 			= 0.932037798905;
-float jet_pT40toInf_up_2018 	= jet_pT40toInf_2018 + 10*( + 0.022959 );
-float jet_pT40toInf_down_2018 = jet_pT40toInf_2018 + 10*( - 0.024759 );
+float jet_pT40toInf_up_2018 	= jet_pT40toInf_2018 + 2*( + 0.022959 );
+float jet_pT40toInf_down_2018 = jet_pT40toInf_2018 + 2*( - 0.024759 );
