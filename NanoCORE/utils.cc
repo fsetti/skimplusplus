@@ -537,6 +537,7 @@ void clear_branches(){
 	jet1_phi				= -9;
 	jet1_bTag				= -9;
 	jet1_id					= -9;
+	jet1_puId				= -9;
 
 	jet2_pt					= -9;
 	jet2_eta				= -9;
@@ -544,6 +545,7 @@ void clear_branches(){
 	jet2_phi				= -9;
 	jet2_bTag				= -9;
 	jet2_id					= -9;
+	jet2_puId				= -9;
 
 	max_bTag				= -9;
 	tt_hel					= -9;
@@ -627,6 +629,39 @@ void clear_branches(){
 	Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext.clear();
 	Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext.clear();
 
+	IsoTrk_SF_id_5perc.clear();
+	IsoTrk_SF_id_5perc_Up.clear();
+	IsoTrk_SF_id_5perc_Down.clear();
+	IsoTrk_SF_id_20perc.clear();
+	IsoTrk_SF_id_20perc_Up.clear();
+	IsoTrk_SF_id_20perc_Down.clear();
+	IsoTrk_SF_id_50perc.clear();
+	IsoTrk_SF_id_50perc_Up.clear();
+	IsoTrk_SF_id_50perc_Down.clear();
+
+	IsoTrk_SF_ES_5perc.clear();
+	IsoTrk_SF_ES_5perc_Up.clear();
+	IsoTrk_SF_ES_5perc_Down.clear();
+	IsoTrk_SF_ES_20perc.clear();
+	IsoTrk_SF_ES_20perc_Up.clear();
+	IsoTrk_SF_ES_20perc_Down.clear();
+	IsoTrk_SF_ES_50perc.clear();
+	IsoTrk_SF_ES_50perc_Up.clear();
+	IsoTrk_SF_ES_50perc_Down.clear();
+
+	val_LHEScaleWeight_0 = -9;
+	val_LHEScaleWeight_1 = -9;
+	val_LHEScaleWeight_2 = -9;
+	val_LHEScaleWeight_3 = -9;
+	val_LHEScaleWeight_4 = -9;
+	val_LHEScaleWeight_5 = -9;
+	val_LHEScaleWeight_6 = -9;
+	val_LHEScaleWeight_7 = -9;
+	val_LHEScaleWeight_8 = -9;
+
+	LHEPdfWeight_Unit = -9;
+	LHEPdfWeight_Up = -9;
+	LHEPdfWeight_Down = -9;
 }
 
 vector<float> get_TauSFs( TString tau_vs_obj, string year, float pt, float eta ){

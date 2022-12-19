@@ -209,7 +209,6 @@ TBranch *b_IsoTrk_SF_ES_50perc;
 TBranch *b_IsoTrk_SF_ES_50perc_Up;
 TBranch *b_IsoTrk_SF_ES_50perc_Down;
 
-TBranch *b_LHEScaleWeight_Unit;
 TBranch *b_LHEScaleWeight_0;
 TBranch *b_LHEScaleWeight_1;
 TBranch *b_LHEScaleWeight_2;
@@ -392,7 +391,6 @@ void fill_branches(bool is_data = false ){
 		b_IsoTrk_SF_ES_50perc_Up->Fill();
 		b_IsoTrk_SF_ES_50perc_Down->Fill();
 
-		b_LHEScaleWeight_Unit->Fill();
 		b_LHEScaleWeight_0->Fill();
 		b_LHEScaleWeight_1->Fill();
 		b_LHEScaleWeight_2->Fill();
@@ -655,16 +653,15 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 			b_IsoTrk_SF_ES_50perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_50perc_Up"     , "vector<float>", &IsoTrk_SF_ES_50perc_Up 	   , 32000,0);
 			b_IsoTrk_SF_ES_50perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_50perc_Down"   , "vector<float>", &IsoTrk_SF_ES_50perc_Down   , 32000,0);
 
-			b_LHEScaleWeight_Unit 				= out_tree->Branch("LHEScaleWeight_Unit"   	, &LHEScaleWeight_Unit   	, "LHEScaleWeight_Unit/F");
-			b_LHEScaleWeight_0 						= out_tree->Branch("LHEScaleWeight_0"   		, &LHEScaleWeight_0   		, "LHEScaleWeight_0/F");
-			b_LHEScaleWeight_1 						= out_tree->Branch("LHEScaleWeight_1"   		, &LHEScaleWeight_1   		, "LHEScaleWeight_1/F");
-			b_LHEScaleWeight_2 						= out_tree->Branch("LHEScaleWeight_2"   		, &LHEScaleWeight_2   		, "LHEScaleWeight_2/F");
-			b_LHEScaleWeight_3 						= out_tree->Branch("LHEScaleWeight_3"   		, &LHEScaleWeight_3   		, "LHEScaleWeight_3/F");
-			b_LHEScaleWeight_4 						= out_tree->Branch("LHEScaleWeight_4"   		, &LHEScaleWeight_4   		, "LHEScaleWeight_4/F");
-			b_LHEScaleWeight_5 						= out_tree->Branch("LHEScaleWeight_5"   		, &LHEScaleWeight_5   		, "LHEScaleWeight_5/F");
-			b_LHEScaleWeight_6 						= out_tree->Branch("LHEScaleWeight_6"   		, &LHEScaleWeight_6   		, "LHEScaleWeight_6/F");
-			b_LHEScaleWeight_7 						= out_tree->Branch("LHEScaleWeight_7"   		, &LHEScaleWeight_7   		, "LHEScaleWeight_7/F");
-			b_LHEScaleWeight_8 						= out_tree->Branch("LHEScaleWeight_8"   		, &LHEScaleWeight_8   		, "LHEScaleWeight_8/F");
+			b_LHEScaleWeight_0 						= out_tree->Branch("LHEScaleWeight_Zero"   	, &val_LHEScaleWeight_0   		, "LHEScaleWeight_Zero/F");
+			b_LHEScaleWeight_1 						= out_tree->Branch("LHEScaleWeight_One"   	, &val_LHEScaleWeight_1   		, "LHEScaleWeight_One/F");
+			b_LHEScaleWeight_2 						= out_tree->Branch("LHEScaleWeight_Two"   	, &val_LHEScaleWeight_2   		, "LHEScaleWeight_Two/F");
+			b_LHEScaleWeight_3 						= out_tree->Branch("LHEScaleWeight_Three"  	, &val_LHEScaleWeight_3   		, "LHEScaleWeight_Three/F");
+			b_LHEScaleWeight_4 						= out_tree->Branch("LHEScaleWeight_Four"   	, &val_LHEScaleWeight_4   		, "LHEScaleWeight_Four/F");
+			b_LHEScaleWeight_5 						= out_tree->Branch("LHEScaleWeight_Five"   	, &val_LHEScaleWeight_5   		, "LHEScaleWeight_Five/F");
+			b_LHEScaleWeight_6 						= out_tree->Branch("LHEScaleWeight_Six"   	, &val_LHEScaleWeight_6   		, "LHEScaleWeight_Six/F");
+			b_LHEScaleWeight_7 						= out_tree->Branch("LHEScaleWeight_Seven"  	, &val_LHEScaleWeight_7   		, "LHEScaleWeight_Seven/F");
+			b_LHEScaleWeight_8 						= out_tree->Branch("LHEScaleWeight_Eight"  	, &val_LHEScaleWeight_8   		, "LHEScaleWeight_Eight/F");
 
 			b_LHEPdfWeight_Unit 					= out_tree->Branch("LHEPdfWeight_Unit"   		, &LHEPdfWeight_Unit   		, "LHEPdfWeight_Unit/F");
 			b_LHEPdfWeight_Up 						= out_tree->Branch("LHEPdfWeight_Up"   			, &LHEPdfWeight_Up   			, "LHEPdfWeight_Up/F");
@@ -730,16 +727,15 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				IsoTrk_SF_ES_20perc_Down	= sf_isotrk_unity;	 
 				IsoTrk_SF_ES_50perc_Down	= sf_isotrk_unity;	 
 
-				LHEScaleWeight_Unit				= 1.;
-				LHEScaleWeight_0					= LHEScaleWeight()[0];
-				LHEScaleWeight_1					= LHEScaleWeight()[1];
-				LHEScaleWeight_2					= LHEScaleWeight()[2];
-				LHEScaleWeight_3					= LHEScaleWeight()[3];
-				LHEScaleWeight_4					= LHEScaleWeight()[4];
-				LHEScaleWeight_5					= LHEScaleWeight()[5];
-				LHEScaleWeight_6					= LHEScaleWeight()[6];
-				LHEScaleWeight_7					= LHEScaleWeight()[7];
-				LHEScaleWeight_8					= LHEScaleWeight()[8];
+				val_LHEScaleWeight_0					= (Float_t)LHEScaleWeight()[0];
+				val_LHEScaleWeight_1					= (Float_t)LHEScaleWeight()[1];
+				val_LHEScaleWeight_2					= (Float_t)LHEScaleWeight()[2];
+				val_LHEScaleWeight_3					= (Float_t)LHEScaleWeight()[3];
+				val_LHEScaleWeight_4					= (Float_t)LHEScaleWeight()[4];
+				val_LHEScaleWeight_5					= (Float_t)LHEScaleWeight()[5];
+				val_LHEScaleWeight_6					= (Float_t)LHEScaleWeight()[6];
+				val_LHEScaleWeight_7					= (Float_t)LHEScaleWeight()[7];
+				val_LHEScaleWeight_8					= (Float_t)LHEScaleWeight()[8];
 
 				//Compute LHE PDF variations
 				LHEPdfWeight_Unit				= 1.;

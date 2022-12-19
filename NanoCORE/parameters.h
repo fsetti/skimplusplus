@@ -271,16 +271,15 @@ vector<float> IsoTrk_SF_ES_50perc;
 vector<float> IsoTrk_SF_ES_50perc_Up;
 vector<float> IsoTrk_SF_ES_50perc_Down;
 
-float LHEScaleWeight_Unit;
-float LHEScaleWeight_0;
-float LHEScaleWeight_1;
-float LHEScaleWeight_2;
-float LHEScaleWeight_3;
-float LHEScaleWeight_4;
-float LHEScaleWeight_5;
-float LHEScaleWeight_6;
-float LHEScaleWeight_7;
-float LHEScaleWeight_8;
+float val_LHEScaleWeight_0;
+float val_LHEScaleWeight_1;
+float val_LHEScaleWeight_2;
+float val_LHEScaleWeight_3;
+float val_LHEScaleWeight_4;
+float val_LHEScaleWeight_5;
+float val_LHEScaleWeight_6;
+float val_LHEScaleWeight_7;
+float val_LHEScaleWeight_8;
 
 float LHEPdfWeight_Unit;
 float LHEPdfWeight_Up;
