@@ -32,7 +32,7 @@ parser.add_argument(
     "--tag",
     help = "unique tag to identify batch of processed samples",
     type = str,
-    default = "27Apr2023_nonRes_SM_finalFit"
+    default = "09May2023_nonRes_SM_final"
 )
 parser.add_argument(
     "--mvas",
@@ -40,6 +40,7 @@ parser.add_argument(
     help = "mva limits to SRs",
     type = float,
     default = [ 0.973610,  0.9891]		#SR optimisation using HiggsDNA outputs (includes Tau SFs, etc.)
+    #default = [ 0.973610,  0.9860]		#v2
 )
 parser.add_argument(
     "--nSRs",
@@ -55,7 +56,7 @@ args.mvas.sort(reverse=True)
 
 out_dir = '/home/users/fsetti/ic_flashgg/CMSSW_10_2_13/src/flashggFinalFit/files_systs/' + str(args.tag) + '/'
 
-os.system("rm -rf %s"%(out_dir))
+#os.system("rm -rf %s"%(out_dir))
 os.system("mkdir -p %s"%(out_dir))
 
 os.system("mkdir -p %s/Data"%(out_dir))
@@ -82,12 +83,15 @@ df = pandas.concat([ df1, df2, df3, df4 ], ignore_index=True)
 df['CMS_hgg_mass'] = df['Diphoton_mass']
 for sr in range(args.nSRs):
 	if args.format == 'parquet':
-		dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ].copy()
+		#dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) & ( df.Diphoton_mass > 100.2 ) ].copy()
+		dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) ].copy()
 	else:
-		dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ].copy()
+		#dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ].copy()
+		dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) ].copy()
 	dfs.to_root(out_dir+'/Data/'+'/allData.root',key='Data_13TeV_SR'+str(sr+1), mode='a')
 
 
+'''
 for proc in procs[:]:
 
 	if proc.split("/")[-1].split("_201")[0] not in procs_dict.keys():
@@ -233,16 +237,31 @@ for proc in procs[:]:
 						w_1_up 		= ( w_1_up / w_sr ) 	/ ( w_tot[proc_lhe][year_str]['lhe_scale_7'] / w_tot[proc_lhe][year_str]['tot_norm'] )
 						w_2_down 	= ( w_2_down / w_sr ) / ( w_tot[proc_lhe][year_str]['lhe_scale_0'] / w_tot[proc_lhe][year_str]['tot_norm'] )
 						w_2_up 		= ( w_2_up / w_sr ) 	/ ( w_tot[proc_lhe][year_str]['lhe_scale_8'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						
+						if w_0_down < 1 and w_0_up < 1:
+							w_0_up = 2 - w_0_down
+						else:
+							w_0_down = 2 - w_0_up
+
+						if w_1_down < 1 and w_1_up < 1:
+							w_1_up = 2 - w_1_down
+						else:
+							w_1_down = 2 - w_1_up
+
+						if w_2_down < 1 and w_2_up < 1:
+							w_2_up = 2 - w_2_down
+						else:
+							w_2_down = 2 - w_2_up
 
 						dfs['weight_lhe_scale0_sf_central'] 		= np.ones(len(dfs['weight_central']))
-						dfs['weight_lhe_scale0_sfDown01sigma']	= np.ones(len(dfs['weight_central'])) * w_0_down
-						dfs['weight_lhe_scale0_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_0_up
+						dfs['weight_lhe_scale0_sfDown01sigma']	= np.ones(len(dfs['weight_central'])) * round(w_0_down, 4)
+						dfs['weight_lhe_scale0_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * round(w_0_up, 4)
 						dfs['weight_lhe_scale1_sf_central']			=	np.ones(len(dfs['weight_central']))
-						dfs['weight_lhe_scale1_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * w_1_down
-						dfs['weight_lhe_scale1_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_1_up
+						dfs['weight_lhe_scale1_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * round(w_1_down, 4)
+						dfs['weight_lhe_scale1_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * round(w_1_up, 4)
 						dfs['weight_lhe_scale2_sf_central']			=	np.ones(len(dfs['weight_central']))
-						dfs['weight_lhe_scale2_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * w_2_down
-						dfs['weight_lhe_scale2_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_2_up
+						dfs['weight_lhe_scale2_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * round(w_2_down, 4)
+						dfs['weight_lhe_scale2_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * round(w_2_up, 4)
 
 						print("-----------------    SR%s   ------------------"%(str(sr+1)))
 						print("SR post normalisation LHE Scale 0 Up variation: " , w_0_up )
@@ -253,3 +272,4 @@ for proc in procs[:]:
 						print("SR post normalisation LHE Scale 2 Down variation: " , w_2_down )
 
 						dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',key=proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
+'''

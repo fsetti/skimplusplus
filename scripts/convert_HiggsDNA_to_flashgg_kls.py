@@ -1,11 +1,22 @@
 import os
 import glob
-import pandas 
+import json
+import pandas
 import argparse
 import root_pandas
 import numpy as np
 
 years = [ '2016UL_preVFP', '2017', '2018' ]
+
+procs_dict_lhe = { "ggH_M125": "ggH", 'ttH_M125':'ttH', 'VBFH_M125':'VBFH', 'VH_M125':'VH',
+
+'HHggTauTau':'HH_ggTauTau_kl1', 'HHggTauTau_kl0':'HH_ggTauTau_kl0', 'HHggTauTau_kl2p45':'HH_ggTauTau_kl2p45', 'HHggTauTau_kl5':'HH_ggTauTau_kl5', 
+
+'HHggWW_semileptonic':'HH_ggWW_semileptonic_kl1', 'HHggWW_semileptonic_kl0':'HH_ggWW_semileptonic_kl0', 'HHggWW_semileptonic_kl2p45':'HH_ggWW_semileptonic_kl2p45', 'HHggWW_semileptonic_kl5':'HH_ggWW_semileptonic_kl5', 
+
+'HHggWW_dileptonic':'HH_ggWW_dileptonic_kl1', 'HHggWW_dileptonic_kl0':'HH_ggWW_dileptonic_kl0', 'HHggWW_dileptonic_kl2p45':'HH_ggWW_dileptonic_kl2p45', 'HHggWW_dileptonic_kl5':'HH_ggWW_dileptonic_kl5', 
+}
+
 
 parser = argparse.ArgumentParser()
 
@@ -13,21 +24,27 @@ parser.add_argument(
     "--input",
     help = "path to input parquet directory",
     type = str,
-    default = "/home/users/smay/HiggsDNA/hhggtautau_sr_11May2022/"
+    default = "/ceph/cms/store/user/fsetti/HiggsDNA/27Apr2023_nonRes_kl_finalFit/"
 )
-
+parser.add_argument(
+    "--format",
+    help = "format of input files, supported .pkl and .parquet",
+    type = str,
+    default = "parquet"
+    #default = "pkl"
+)
 parser.add_argument(
     "--tag",
     help = "unique tag to identify batch of processed samples",
     type = str,
-    default = "25May2022"
+    default = "27Apr2023_nonRes_kl_finalFit"
 )
 parser.add_argument(
     "--mvas",
 	nargs='*',
     help = "mva limits to SRs",
     type = float,
-    default = [0.959506, 0.9899]	
+    default = [ 0.973610,  0.9891]		#SR optimisation using HiggsDNA outputs (includes Tau SFs, etc.)
 )
 parser.add_argument(
     "--nSRs",
@@ -43,51 +60,97 @@ args.mvas.sort(reverse=True)
 
 out_dir = '/home/users/fsetti/HHggTauTau/coupling_scan/CMSSW_10_2_13/src/flashggFinalFit/files_systs/' + str(args.tag) + '/'
 
-#os.system("rm -rf %s"%(out_dir))
+os.system("rm -rf %s"%(out_dir))
 os.system("mkdir -p %s"%(out_dir))
+os.system("cp -r /home/users/fsetti/ic_flashgg/CMSSW_10_2_13/src/flashggFinalFit/files_systs/27Apr2023_nonRes_SM_finalFit/* %s"%(out_dir)) 	#copy over Data + res bkg models
 
-os.system("mkdir -p %s/Data"%(out_dir))
-os.system("mkdir -p %s/2016"%(out_dir))
-os.system("mkdir -p %s/2017"%(out_dir))
-os.system("mkdir -p %s/2018"%(out_dir))
+os.system("rm -rf %s/2016/HH*.root"%(out_dir))
+os.system("rm -rf %s/2016/ws_*"%(out_dir))
+os.system("rm -rf %s/2017/HH*.root"%(out_dir))
+os.system("rm -rf %s/2017/ws_*"%(out_dir))
+os.system("rm -rf %s/2018/HH*.root"%(out_dir))
+os.system("rm -rf %s/2018/ws_*"%(out_dir))
+
+#os.system("mkdir -p %s/Data"%(out_dir))
+#os.system("mkdir -p %s/2016"%(out_dir))
+#os.system("mkdir -p %s/2017"%(out_dir))
+#os.system("mkdir -p %s/2018"%(out_dir))
 
 procs = glob.glob(str(args.input)+'/*HH*')
+
+'''
+#Process Data - Use hardcoded MET filtered data
+files = glob.glob('/ceph/cms/store/user/fsetti/HiggsDNA/27Apr2023_nonRes_SM_finalFit/Data*/*.'+args.format)
+if args.format == 'parquet':
+	df1 = pandas.read_parquet(files[0], engine='pyarrow')
+	df2 = pandas.read_parquet(files[1], engine='pyarrow')
+	df3 = pandas.read_parquet(files[2], engine='pyarrow')
+	df4 = pandas.read_parquet(files[3], engine='pyarrow')
+else:
+	df1 = pandas.read_pickle(files[0])
+	df2 = pandas.read_pickle(files[1])
+	df3 = pandas.read_pickle(files[2])
+	df4 = pandas.read_pickle(files[3])
+#Merge all years together
+df = pandas.concat([ df1, df2, df3, df4 ], ignore_index=True)
+df['CMS_hgg_mass'] = df['Diphoton_mass']
+for sr in range(args.nSRs):
+	if args.format == 'parquet':
+		dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ].copy()
+	else:
+		dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) & ( ( df.Diphoton_mass < 120 ) | ( df.Diphoton_mass > 130 ) ) ].copy()
+	dfs.to_root(out_dir+'/Data/'+'/allData.root',key='Data_13TeV_SR'+str(sr+1), mode='a')
+'''
 
 for proc in procs[:]:
 
 	for year in years:
 		if year not in proc.split("/")[-1]:
 			continue
+	
 		#get all files including systematic variations
-		files = glob.glob(proc+'/*.parquet')
+		files = glob.glob(proc+'/*.'+args.format)
 		
 		for file_ in files:
-			#print ("Now processing: ".join(file_.split("/")[-2:]), " and ".join(file_.replace("HHggTauTau","HHggWW_dileptonic").split("/")[-2:]), " and ".join(file_.replace("HHggTauTau","HHggWW_semileptonic").split("/")[-2:]) )
-			df = pandas.read_parquet(file_, engine='pyarrow')
+			print ("Now processing: ", file_)
+			df = pandas.DataFrame()
+			if args.format == 'parquet':
+				df = pandas.read_parquet(file_, engine='pyarrow')
+			else:
+				df = pandas.read_pickle(file_)
 			if year == '2016UL_preVFP':
-				df_ext1 						= pandas.read_parquet(file_.replace("2016UL_preVFP","2016UL_postVFP"), engine='pyarrow')
-				df = pandas.concat([ df, df_ext1 ], ignore_index=True)
+				try:
+					if args.format == 'parquet':
+						df_ext1 						= pandas.read_parquet(file_.replace("2016UL_preVFP","2016UL_postVFP"), engine='pyarrow')
+					else:
+						df_ext1 						= pandas.read_pickle(file_.replace("2016UL_preVFP","2016UL_postVFP"))
+					df = pandas.concat([ df, df_ext1 ], ignore_index=True)
+				except:
+					print ("Not finding 2016UL_postVFP for this sample: ", proc )
+					print ("Most likely it is data")
 				
 			tag	=	''
 			if 'nominal' not in file_.split("/")[-1]:
-				if 'up' in file_.split("/")[-1]:
+				#consider different naming conventions
+				if args.format == 'parquet':
 					tag	= file_.split("merged")[-1]
+				else:
+					tag	= "_" +file_.split("/")[-1]
+				if 'up' in file_.split("/")[-1]:
 					tag	= tag.split("_up")[0]
 					tag	+= 'Up01sigma'
 				if 'down' in file_.split("/")[-1]:
-					tag	= file_.split("merged")[-1]
 					tag	= tag.split("_down")[0]
 					tag	+= 'Down01sigma'
 			if 'scale' in file_.split("/")[-1]:
 				tag = '_MCScale' + tag
 			if 'smear' in file_.split("/")[-1]:
 				tag = '_MCSmear' + tag
-	
+
 			#Define hgg_mass & dZ variable
+			df['weight'] = df['weight_central'] #* 2			#ONLY for MC!! 	Removed factor x2 since BDT trained on independent samples
 			df['CMS_hgg_mass'] = df['Diphoton_mass']
-			df['dZ']	= np.ones(len(df['Diphoton_mass']))
-			df['weight'] = df['weight_central'] * 2
-			df['weight_central'] = df['weight'] 
+			df['dZ'] = np.ones(len(df['Diphoton_mass']))
 			yield_systematics	= [ key for key in df.keys() if ( "weight_" in key ) and ( "_up" in key or "_down" in key )]
 			rename_sys	= {}
 			for sys in yield_systematics:
@@ -141,7 +204,69 @@ for proc in procs[:]:
 			year_str = year
 			if '2016' in year:
 				year_str = '2016'
+
 			for sr in range(args.nSRs):
-					dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) & (df.event % 2 == 1) ]
-					#dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) & ( df.weight_central > -9999 ) ]
-					dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',''+proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
+					if args.format == 'parquet':
+						dfs = df.loc[ ( df.bdt_score < args.mvas[sr] ) & ( df.bdt_score >= args.mvas[sr+1] ) ].copy()	#No need to select odd events, since BDT trained on private MC
+					else:
+						dfs = df.loc[ ( df.mva_score < args.mvas[sr] ) & ( df.mva_score >= args.mvas[sr+1] ) ].copy() 
+					#dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',key=proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
+
+					if tag != '':
+						dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',key=proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
+
+					else:
+						proc_lhe	= procs_dict_lhe[proc.split("/")[-1].split("_201")[0]]
+
+						if proc_lhe == 'ggH':
+							dfs['weight_lhe_scale0_sf_central'] 		= np.ones(len(dfs['weight_central']))
+							dfs['weight_lhe_scale0_sfDown01sigma']	= np.ones(len(dfs['weight_central'])) 
+							dfs['weight_lhe_scale0_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) 
+							dfs['weight_lhe_scale1_sf_central']			=	np.ones(len(dfs['weight_central']))
+							dfs['weight_lhe_scale1_sfDown01sigma']	=	np.ones(len(dfs['weight_central']))
+							dfs['weight_lhe_scale1_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) 
+							dfs['weight_lhe_scale2_sf_central']			=	np.ones(len(dfs['weight_central']))
+							dfs['weight_lhe_scale2_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) 
+							dfs['weight_lhe_scale2_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) 
+
+							dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',key=proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
+							continue
+
+						#Compute LHE scales
+						w_sr 			= sum(dfs.weight_central)
+						w_0_down	= sum(dfs.weight_central *	dfs.weight_lhe_scale0_sfDown01sigma)
+						w_0_up		= sum(dfs.weight_central *	dfs.weight_lhe_scale0_sfUp01sigma)
+						w_1_down	= sum(dfs.weight_central *	dfs.weight_lhe_scale1_sfDown01sigma)
+						w_1_up		= sum(dfs.weight_central *	dfs.weight_lhe_scale1_sfUp01sigma)
+						w_2_down	= sum(dfs.weight_central *	dfs.weight_lhe_scale2_sfDown01sigma)
+						w_2_up		= sum(dfs.weight_central *	dfs.weight_lhe_scale2_sfUp01sigma)
+
+						w_tot = {}
+						with open("/home/users/fsetti/HHggTauTau/skimplusplus/lhe_scales/scales.json") as json_file:
+							w_tot = json.load(json_file)
+						w_0_down 	= ( w_0_down / w_sr ) / ( w_tot[proc_lhe][year_str]['lhe_scale_3'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						w_0_up 		= ( w_0_up / w_sr ) 	/ ( w_tot[proc_lhe][year_str]['lhe_scale_5'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						w_1_down 	= ( w_1_down / w_sr ) / ( w_tot[proc_lhe][year_str]['lhe_scale_1'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						w_1_up 		= ( w_1_up / w_sr ) 	/ ( w_tot[proc_lhe][year_str]['lhe_scale_7'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						w_2_down 	= ( w_2_down / w_sr ) / ( w_tot[proc_lhe][year_str]['lhe_scale_0'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+						w_2_up 		= ( w_2_up / w_sr ) 	/ ( w_tot[proc_lhe][year_str]['lhe_scale_8'] / w_tot[proc_lhe][year_str]['tot_norm'] )
+
+						dfs['weight_lhe_scale0_sf_central'] 		= np.ones(len(dfs['weight_central']))
+						dfs['weight_lhe_scale0_sfDown01sigma']	= np.ones(len(dfs['weight_central'])) * w_0_down
+						dfs['weight_lhe_scale0_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_0_up
+						dfs['weight_lhe_scale1_sf_central']			=	np.ones(len(dfs['weight_central']))
+						dfs['weight_lhe_scale1_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * w_1_down
+						dfs['weight_lhe_scale1_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_1_up
+						dfs['weight_lhe_scale2_sf_central']			=	np.ones(len(dfs['weight_central']))
+						dfs['weight_lhe_scale2_sfDown01sigma']	=	np.ones(len(dfs['weight_central'])) * w_2_down
+						dfs['weight_lhe_scale2_sfUp01sigma']		=	np.ones(len(dfs['weight_central'])) * w_2_up
+
+						print("-----------------    SR%s   ------------------"%(str(sr+1)))
+						print("SR post normalisation LHE Scale 0 Up variation: " , w_0_up )
+						print("SR post normalisation LHE Scale 0 Down variation: " , w_0_down )
+						print("SR post normalisation LHE Scale 1 Up variation: " , w_1_up )
+						print("SR post normalisation LHE Scale 1 Down variation: " , w_1_down )
+						print("SR post normalisation LHE Scale 2 Up variation: " , w_2_up )
+						print("SR post normalisation LHE Scale 2 Down variation: " , w_2_down )
+
+						dfs.to_root(out_dir+year_str+'/'+proc_tag+'_125_13TeV.root',key=proc_tag+'_125_13TeV_SR'+str(sr+1)+tag, mode='a')
