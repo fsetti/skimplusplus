@@ -727,6 +727,24 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				IsoTrk_SF_ES_20perc_Down	= sf_isotrk_unity;	 
 				IsoTrk_SF_ES_50perc_Down	= sf_isotrk_unity;	 
 
+				if ( proc == "ggH" || !resonant ){
+				val_LHEScaleWeight_0					= (Float_t)1;
+				val_LHEScaleWeight_1					= (Float_t)1;
+				val_LHEScaleWeight_2					= (Float_t)1;
+				val_LHEScaleWeight_3					= (Float_t)1;
+				val_LHEScaleWeight_4					= (Float_t)1;
+				val_LHEScaleWeight_5					= (Float_t)1;
+				val_LHEScaleWeight_6					= (Float_t)1;
+				val_LHEScaleWeight_7					= (Float_t)1;
+				val_LHEScaleWeight_8					= (Float_t)1;
+
+				//Compute LHE PDF variations
+				LHEPdfWeight_Unit			= 1.;
+				LHEPdfWeight_Up				= 1.;
+				LHEPdfWeight_Down			= 1.;
+				}
+
+				else{
 				val_LHEScaleWeight_0					= (Float_t)LHEScaleWeight()[0];
 				val_LHEScaleWeight_1					= (Float_t)LHEScaleWeight()[1];
 				val_LHEScaleWeight_2					= (Float_t)LHEScaleWeight()[2];
@@ -757,6 +775,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				pdf_delta = TMath::Sqrt( pow( as_unc, 2) + pow(hess_unc, 2) );
 				LHEPdfWeight_Up				= 1.+pdf_delta;
 				LHEPdfWeight_Down			= 1.-pdf_delta;
+				}
 			}
 
  			if ( ggf_samples && ( fabs(genWeight()) >= 0.5 ) ){
@@ -782,7 +801,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  					&&	(	fabs(Photon_eta().at(i)) < 1.442 || fabs(Photon_eta().at(i)) > 1.566 )
  					&&	( Photon_r9().at(i) > 0.8 || Photon_chargedHadronIso().at(i) < 20 || Photon_chargedHadronIso().at(i) / Photon_pt().at(i) < 0.3 )
  					&&  ( Photon_isScEtaEB().at(i) || Photon_isScEtaEE().at(i) )
- 					&&    Photon_mvaID().at(i) > pho_idmva_cut
+ 					&&    Photon_mvaID_WP90	().at(i)
  					){
  						pho_cands.push_back(i);					
  						pho_pt_cands.push_back( Photon_pt().at(i) );					
@@ -819,7 +838,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		//photon selection
  		if  (  ( Photon_pt().at(gHidx[0]) < pho_pt_cut 				|| Photon_pt().at(gHidx[1]) < pho_pt_cut ) 
  		  	|| ( Photon_pt().at(gHidx[0]) / mgg < lead_pt_mgg_cut 	|| Photon_pt().at(gHidx[1]) / mgg < sublead_pt_mgg_cut ) 
- 		  	|| ( Photon_mvaID().at(gHidx[0]) < pho_idmva_cut 			|| Photon_mvaID().at(gHidx[1]) < pho_idmva_cut ) 
+ 		  	|| ( !Photon_mvaID_WP90().at(gHidx[0]) 	|| !Photon_mvaID_WP90().at(gHidx[1])  ) 
  		  	|| ( Photon_electronVeto().at(gHidx[0]) < pho_eveto_cut 	|| Photon_electronVeto().at(gHidx[1]) < pho_eveto_cut ) 
  		  	|| ( fabs(Photon_eta().at(gHidx[0])) > pho_eta_cut 		|| fabs(Photon_eta().at(gHidx[1])) > pho_eta_cut ) 
  		  	|| ( fabs(Photon_eta().at(gHidx[0])) > trans_eta_low 		&& fabs(Photon_eta().at(gHidx[0])) < trans_eta_high ) 

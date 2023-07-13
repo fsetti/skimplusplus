@@ -47,7 +47,6 @@ TBranch *b_year									;
 TBranch *b_process_id						;
 TBranch *b_weight								;
 TBranch *b_Category							;
-TBranch *b_eft_weight
                                 ;
 TBranch *b_cat1									;
 TBranch *b_cat2									;
@@ -224,13 +223,15 @@ TBranch *b_LHEPdfWeight_Unit;
 TBranch *b_LHEPdfWeight_Up;
 TBranch *b_LHEPdfWeight_Down;
 
+TBranch *b_eft_mhh;
+TBranch *b_eft_cs;
+
 void fill_branches(bool is_data = false ){
 
 	b_year->Fill();
 	b_process_id->Fill();
 	b_weight->Fill();
 	b_Category->Fill();
-	b_eft_weight->Fill();
 	                        
 	b_cat1->Fill();
 	b_cat2->Fill();
@@ -405,6 +406,10 @@ void fill_branches(bool is_data = false ){
 		b_LHEPdfWeight_Unit->Fill();
 		b_LHEPdfWeight_Up->Fill();
 		b_LHEPdfWeight_Down->Fill();
+
+		b_eft_mhh->Fill();
+		b_eft_cs->Fill();
+
 	}
 }
 
@@ -418,6 +423,9 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 	if ( process_ID == 0 ) isData = true;
 
 	process_id = process_ID;
+
+	bool ggf_samples = false;
+	if ( process_id < 0 ) ggf_samples = true;
 
   int nEventsTotal = 0;
   int nEventsChain = ch->GetEntries();
@@ -444,25 +452,27 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		tree->SetBranchStatus("MET_*", 1);
  		tree->SetBranchStatus("HLT_*", 1);
  		tree->SetBranchStatus("Flag_*", 1);
- 		tree->SetBranchStatus("GenPart_*", 1);
- 		tree->SetBranchStatus("*eight*", 1);			
- 		//add systematics
- 		tree->SetBranchStatus("Pileup*", 1);
- 		tree->SetBranchStatus("puWeight*", 1);
- 		tree->SetBranchStatus("*sf*", 1);
- 		tree->SetBranchStatus("*SF*", 1);
- 		tree->SetBranchStatus("*igma*", 1);
- 		tree->SetBranchStatus("*cale*", 1);
- 		tree->SetBranchStatus("*Up*", 1);
- 		tree->SetBranchStatus("*up*", 1);
- 		tree->SetBranchStatus("*Down*", 1);
- 		//tree->SetBranchStatus("*down*", 1);
- 		tree->SetBranchStatus("*entral*", 1);
- 		tree->SetBranchStatus("LHE*", 1);
+		if ( proc != "Data" ){
+ 			tree->SetBranchStatus("genWeight", 1);			
+ 			tree->SetBranchStatus("GenPart_*", 1);
+ 			tree->SetBranchStatus("*eight*", 1);			
+ 			//add systematics
+ 			tree->SetBranchStatus("Pileup*", 1);
+ 			tree->SetBranchStatus("puWeight*", 1);
+ 			tree->SetBranchStatus("*sf*", 1);
+ 			tree->SetBranchStatus("*SF*", 1);
+ 			tree->SetBranchStatus("*igma*", 1);
+ 			tree->SetBranchStatus("*cale*", 1);
+ 			tree->SetBranchStatus("*Up*", 1);
+ 			tree->SetBranchStatus("*up*", 1);
+ 			tree->SetBranchStatus("*Down*", 1);
+ 			//tree->SetBranchStatus("*down*", 1);
+ 			tree->SetBranchStatus("*entral*", 1);
+ 			tree->SetBranchStatus("LHE*", 1);
+ 		}
  		tree->SetBranchStatus("event", 1);
  		tree->SetBranchStatus("luminosityBlock", 1);
  		tree->SetBranchStatus("run", 1);
- 		tree->SetBranchStatus("genWeight", 0);			
 
  		TString file_name = "/ceph/cms/store/user/fsetti/c++_looper_ul_output/" + date + "/" + proc + "/" + proc + "_" + std::to_string(idx) + "_" + str_year + ".root";
  		TFile* f1 = new TFile(file_name, "RECREATE");
@@ -488,7 +498,6 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		b_process_id							=	out_tree->Branch("process_id"							,	&process_id				,	"process_id/I"		);
  		b_weight									=	out_tree->Branch("weight"									,	&t_weight				,	"weight/F"			);
  		b_Category								=	out_tree->Branch("Category"								,	&category				,	"Category/I"		);
-		b_eft_weight							=	out_tree->Branch("genWeight"							,	&t_eft_weight		,	"genWeight/F"		);
  	                            
  		b_cat1										=	out_tree->Branch("cat1"										,	&cat1					,	"cat1/B"			);
  		b_cat2										=	out_tree->Branch("cat2"										,	&cat2					,	"cat2/B"			);
@@ -664,6 +673,9 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 			b_LHEPdfWeight_Unit 					= out_tree->Branch("LHEPdfWeight_Unit"   		, &LHEPdfWeight_Unit   		, "LHEPdfWeight_Unit/F");
 			b_LHEPdfWeight_Up 						= out_tree->Branch("LHEPdfWeight_Up"   			, &LHEPdfWeight_Up   			, "LHEPdfWeight_Up/F");
 			b_LHEPdfWeight_Down 					= out_tree->Branch("LHEPdfWeight_Down"   		, &LHEPdfWeight_Down   		, "LHEPdfWeight_Down/F");
+
+			b_eft_mhh 										= out_tree->Branch("eft_mhh"   		, &eft_mhh   		, "eft_mhh/F");
+			b_eft_cs 											= out_tree->Branch("eft_cs"   		, &eft_cs   		, "eft_cs/F");
 		}
 
     for( unsigned int loop_event = 0; loop_event < out_tree->GetEntriesFast(); ++loop_event) {
@@ -679,7 +691,6 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  	 		t_run			= run();
  	 		t_lumiBlock		= luminosityBlock();
  	 		t_event			= event();
-			t_eft_weight		= eft_weight();
 			if (isData){
 				t_MET_pt		= MET_pt();
 				t_MET_phi		= MET_phi();
@@ -689,6 +700,17 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				t_MET_phi		= MET_T1_phi();
 			}
  	 		t_weight		= weight;
+
+			vector<unsigned int> HH_idx;
+			for (unsigned int i=0; i<nGenPart(); i++){
+				if ( GenPart_pdgId()[i] == 25 && GenPart_statusFlags()[i] & (1 << 13) ) HH_idx.push_back(i);
+			}
+
+			auto H1 = GenPart_p4()[HH_idx[0]];
+			auto H2 = GenPart_p4()[HH_idx[1]];
+
+			eft_mhh					= ( H1 + H2 ).M();
+ 			eft_cs	= fabs( getCosThetaStar_CS_old( H1, H2 ) );
 
 			//Load Tau SFs
 			if ( !isData ){
@@ -726,6 +748,24 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				IsoTrk_SF_ES_20perc_Down	= sf_isotrk_unity;	 
 				IsoTrk_SF_ES_50perc_Down	= sf_isotrk_unity;	 
 
+				if ( proc == "ggH" || !resonant ){
+				val_LHEScaleWeight_0					= (Float_t)1;
+				val_LHEScaleWeight_1					= (Float_t)1;
+				val_LHEScaleWeight_2					= (Float_t)1;
+				val_LHEScaleWeight_3					= (Float_t)1;
+				val_LHEScaleWeight_4					= (Float_t)1;
+				val_LHEScaleWeight_5					= (Float_t)1;
+				val_LHEScaleWeight_6					= (Float_t)1;
+				val_LHEScaleWeight_7					= (Float_t)1;
+				val_LHEScaleWeight_8					= (Float_t)1;
+
+				//Compute LHE PDF variations
+				LHEPdfWeight_Unit			= 1.;
+				LHEPdfWeight_Up				= 1.;
+				LHEPdfWeight_Down			= 1.;
+				}
+
+				else{
 				val_LHEScaleWeight_0					= (Float_t)LHEScaleWeight()[0];
 				val_LHEScaleWeight_1					= (Float_t)LHEScaleWeight()[1];
 				val_LHEScaleWeight_2					= (Float_t)LHEScaleWeight()[2];
@@ -756,15 +796,15 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 				pdf_delta = TMath::Sqrt( pow( as_unc, 2) + pow(hess_unc, 2) );
 				LHEPdfWeight_Up				= 1.+pdf_delta;
 				LHEPdfWeight_Down			= 1.-pdf_delta;
-				
+				}
 			}
 
-      if ( t_eft_weight == -9 ){
-        t_weight = -99999;
-        fill_branches(isData);
-        continue;
-      }
- 	 		if ( proc != "Data" ) weight = t_eft_weight * scale_factor;
+ 			if ( ggf_samples && ( fabs(genWeight()) >= 0.5 ) ){
+ 	 			t_weight = -99999;
+ 				fill_branches(isData);
+ 				continue;
+ 			}
+ 	 		if ( proc != "Data" ) weight = genWeight() * scale_factor;
 
  			//////////////////////////////////////////////////////////////////////////////////////////////
  			//////////////////////////////////////////////////////////////////////////////////////////////

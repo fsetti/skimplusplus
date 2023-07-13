@@ -47,7 +47,7 @@ int make_hist( TChain *ch, string proc, string str_year, string tag, float scale
   if ( str_year == "2016_APV") year = 2016;
   else { year = stoi(str_year); }
 
-	TString fname = "EFT_reweight/" + tag + "/hists/" + str_year + "/" + proc + ".root";
+	TString fname = "/ceph/cms/store/user/fsetti/EFT_samples/" + tag + "/hists/" + str_year + "/" + proc + ".root";
 	TFile* f1 = new TFile( fname, "RECREATE");
 
 	const Int_t NCostHHbin = 4;
@@ -118,7 +118,7 @@ int make_hist( TChain *ch, string proc, string str_year, string tag, float scale
 
 int ScanChain( TChain *ch, string proc, string str_year, string eft_bm, string tag, float scales1fb_kl0, float scales1fb_kl1, float scales1fb_kl2p45, float scales1fb_kl5 ) {
 
-	TString file_name = "EFT_reweight/" + tag + "/hists/" + str_year + "/" + proc + ".root";
+	TString file_name = "/ceph/cms/store/user/fsetti/EFT_samples/" + tag + "/hists/" + str_year + "/" + proc + ".root";
 	TFile* inputfile =  new TFile(file_name);
 	TH2F* histo_Nev = (TH2F*) inputfile->Get("histo_Nev");
 	double Nevtot = histo_Nev->Integral();
@@ -160,7 +160,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string eft_bm, string t
 		tree->SetBranchStatus("*", 1);
 		runs->SetBranchStatus("*", 1);
 
-		TString fname = "EFT_reweight/" + tag + "/"+ proc + "_" + eft_bm + "/" + str_year + "/" + proc + "_" + std::to_string(idx) + ".root";
+		TString fname = "/ceph/cms/store/user/fsetti/EFT_samples/" + tag + "/"+ proc + "_" + eft_bm + "/" + str_year + "/" + proc + "_" + std::to_string(idx) + ".root";
 		TFile* f1 = new TFile( fname, "RECREATE");
 	
 		TTree *runs_tree	=	new TTree("Runs","Runs");
@@ -216,8 +216,12 @@ int ScanChain( TChain *ch, string proc, string str_year, string eft_bm, string t
 			double Noutputev = XS * histo_Nev->GetXaxis()->GetBinWidth(ibinmhh) * histo_Nev->GetYaxis()->GetBinWidth(ibincosthetaHH);
 			double reweight = Noutputev/Nev * Nevtot/XStot;
 
-			eft_weight = reweight * genWeight() * scale1fb * br_spec / 4;		//divide by 4 since we are combining 4 ggHH NLO samples... really no idea how this works
+			eft_weight = reweight * genWeight() * scale1fb * br_spec / 4 ;		//divide by 4 since we are combining 4 ggHH NLO samples... really no idea how this works
 			eft_reweight = reweight ;
+
+			cout << "for mHH: " << event_mHH << " and cs angle: " << event_costhetaHH << " , we get this re-weight: " << reweight << endl;
+			cout << "and genWeight: " << genWeight() << " and scale1fb: " << scale1fb << endl;
+
 
 			b_scale1fb->Fill();	
 			b_eft_weight->Fill();	

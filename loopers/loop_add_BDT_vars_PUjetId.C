@@ -47,7 +47,6 @@ TBranch *b_year									;
 TBranch *b_process_id						;
 TBranch *b_weight								;
 TBranch *b_Category							;
-TBranch *b_eft_weight
                                 ;
 TBranch *b_cat1									;
 TBranch *b_cat2									;
@@ -210,27 +209,12 @@ TBranch *b_IsoTrk_SF_ES_50perc;
 TBranch *b_IsoTrk_SF_ES_50perc_Up;
 TBranch *b_IsoTrk_SF_ES_50perc_Down;
 
-TBranch *b_LHEScaleWeight_0;
-TBranch *b_LHEScaleWeight_1;
-TBranch *b_LHEScaleWeight_2;
-TBranch *b_LHEScaleWeight_3;
-TBranch *b_LHEScaleWeight_4;
-TBranch *b_LHEScaleWeight_5;
-TBranch *b_LHEScaleWeight_6;
-TBranch *b_LHEScaleWeight_7;
-TBranch *b_LHEScaleWeight_8;
-
-TBranch *b_LHEPdfWeight_Unit;
-TBranch *b_LHEPdfWeight_Up;
-TBranch *b_LHEPdfWeight_Down;
-
-void fill_branches(bool is_data = false ){
+void fill_branches(){
 
 	b_year->Fill();
 	b_process_id->Fill();
 	b_weight->Fill();
 	b_Category->Fill();
-	b_eft_weight->Fill();
 	                        
 	b_cat1->Fill();
 	b_cat2->Fill();
@@ -362,50 +346,36 @@ void fill_branches(bool is_data = false ){
 	b_phi_tautau_vis->Fill();
 	b_dZ->Fill();
 
-	if ( !is_data ){
-		b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext->Fill();	
-		b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext->Fill();	
+	b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext->Fill();	
 
-		b_IsoTrk_SF_id_5perc->Fill();
-		b_IsoTrk_SF_id_5perc_Up->Fill();
-		b_IsoTrk_SF_id_5perc_Down->Fill();
-		b_IsoTrk_SF_id_20perc->Fill();
-		b_IsoTrk_SF_id_20perc_Up->Fill();
-		b_IsoTrk_SF_id_20perc_Down->Fill();
-		b_IsoTrk_SF_id_50perc->Fill();
-		b_IsoTrk_SF_id_50perc_Up->Fill();
-		b_IsoTrk_SF_id_50perc_Down->Fill();
-		                            
-		b_IsoTrk_SF_ES_5perc->Fill();
-		b_IsoTrk_SF_ES_5perc_Up->Fill();
-		b_IsoTrk_SF_ES_5perc_Down->Fill();
-		b_IsoTrk_SF_ES_20perc->Fill();
-		b_IsoTrk_SF_ES_20perc_Up->Fill();
-		b_IsoTrk_SF_ES_20perc_Down->Fill();
-		b_IsoTrk_SF_ES_50perc->Fill();
-		b_IsoTrk_SF_ES_50perc_Up->Fill();
-		b_IsoTrk_SF_ES_50perc_Down->Fill();
+	b_IsoTrk_SF_id_5perc->Fill();
+	b_IsoTrk_SF_id_5perc_Up->Fill();
+	b_IsoTrk_SF_id_5perc_Down->Fill();
+	b_IsoTrk_SF_id_20perc->Fill();
+	b_IsoTrk_SF_id_20perc_Up->Fill();
+	b_IsoTrk_SF_id_20perc_Down->Fill();
+	b_IsoTrk_SF_id_50perc->Fill();
+	b_IsoTrk_SF_id_50perc_Up->Fill();
+	b_IsoTrk_SF_id_50perc_Down->Fill();
+	                            
+	b_IsoTrk_SF_ES_5perc->Fill();
+	b_IsoTrk_SF_ES_5perc_Up->Fill();
+	b_IsoTrk_SF_ES_5perc_Down->Fill();
+	b_IsoTrk_SF_ES_20perc->Fill();
+	b_IsoTrk_SF_ES_20perc_Up->Fill();
+	b_IsoTrk_SF_ES_20perc_Down->Fill();
+	b_IsoTrk_SF_ES_50perc->Fill();
+	b_IsoTrk_SF_ES_50perc_Up->Fill();
+	b_IsoTrk_SF_ES_50perc_Down->Fill();
 
-		b_LHEScaleWeight_0->Fill();
-		b_LHEScaleWeight_1->Fill();
-		b_LHEScaleWeight_2->Fill();
-		b_LHEScaleWeight_3->Fill();
-		b_LHEScaleWeight_4->Fill();
-		b_LHEScaleWeight_5->Fill();
-		b_LHEScaleWeight_7->Fill();
-		b_LHEScaleWeight_8->Fill();
-
-		b_LHEPdfWeight_Unit->Fill();
-		b_LHEPdfWeight_Up->Fill();
-		b_LHEPdfWeight_Down->Fill();
-	}
 }
 
 int ScanChain( TChain *ch, string proc, string str_year, string date, float scale_factor = 1, int process_ID=-9999, bool resonant = false ) {
@@ -418,6 +388,9 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
 	if ( process_ID == 0 ) isData = true;
 
 	process_id = process_ID;
+
+	bool ggf_samples = false;
+	if ( process_id < 0 ) ggf_samples = true;
 
   int nEventsTotal = 0;
   int nEventsChain = ch->GetEntries();
@@ -444,6 +417,8 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		tree->SetBranchStatus("MET_*", 1);
  		tree->SetBranchStatus("HLT_*", 1);
  		tree->SetBranchStatus("Flag_*", 1);
+		if ( proc != "Data" ){
+ 		tree->SetBranchStatus("genWeight", 1);			
  		tree->SetBranchStatus("GenPart_*", 1);
  		tree->SetBranchStatus("*eight*", 1);			
  		//add systematics
@@ -458,11 +433,10 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		tree->SetBranchStatus("*Down*", 1);
  		//tree->SetBranchStatus("*down*", 1);
  		tree->SetBranchStatus("*entral*", 1);
- 		tree->SetBranchStatus("LHE*", 1);
+ 		}
  		tree->SetBranchStatus("event", 1);
  		tree->SetBranchStatus("luminosityBlock", 1);
  		tree->SetBranchStatus("run", 1);
- 		tree->SetBranchStatus("genWeight", 0);			
 
  		TString file_name = "/ceph/cms/store/user/fsetti/c++_looper_ul_output/" + date + "/" + proc + "/" + proc + "_" + std::to_string(idx) + "_" + str_year + ".root";
  		TFile* f1 = new TFile(file_name, "RECREATE");
@@ -488,7 +462,6 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		b_process_id							=	out_tree->Branch("process_id"							,	&process_id				,	"process_id/I"		);
  		b_weight									=	out_tree->Branch("weight"									,	&t_weight				,	"weight/F"			);
  		b_Category								=	out_tree->Branch("Category"								,	&category				,	"Category/I"		);
-		b_eft_weight							=	out_tree->Branch("genWeight"							,	&t_eft_weight		,	"genWeight/F"		);
  	                            
  		b_cat1										=	out_tree->Branch("cat1"										,	&cat1					,	"cat1/B"			);
  		b_cat2										=	out_tree->Branch("cat2"										,	&cat2					,	"cat2/B"			);
@@ -618,53 +591,38 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		b_eta_tautau_vis					=	out_tree->Branch("eta_tautau_vis"					,	&eta_tautau_vis				, 	"eta_tautau_vis/F"			);	  
  		b_eta_tautau_vis_bdt			=	out_tree->Branch("eta_tautau_vis_bdt"			,	&eta_tautau_vis_bdt			, 	"eta_tautau_vis_bdt/F"		);	  
  		b_phi_tautau_vis					=	out_tree->Branch("phi_tautau_vis"					,	&phi_tautau_vis				, 	"phi_tautau_vis/F"			);	  
- 		b_dZ											=	out_tree->Branch("dZ"											,	&dZ  						, 	"dZ/F"						);
+ 		b_dZ											=	out_tree->Branch("dZ"											,	&dZ  						, 	"dZ/F"						);	  
 
-		if ( !isData ){
- 			b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_Loose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_Loose_ext 	 	, 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  , 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext, 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLoose_ext 	 	, 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  , 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext, 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLoose_ext 	 	, 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  , 32000,0);
- 			b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSjet_Loose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_Loose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_Loose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLoose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLoose_ext					=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLoose_ext"		 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLoose_ext 	 	, 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext				=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext"	 	,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  , 32000,0);
+ 		b_Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext			=	out_tree->Branch("Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext" ,	"vector<float>", &Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext, 32000,0);
 
-			b_IsoTrk_SF_id_5perc					= out_tree->Branch("IsoTrack_SF_id_5perc"     		, "vector<float>", &IsoTrk_SF_id_5perc			   , 32000,0);
-			b_IsoTrk_SF_id_5perc_Up 			= out_tree->Branch("IsoTrack_SF_id_5perc_Up"     	, "vector<float>", &IsoTrk_SF_id_5perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_id_5perc_Down 		= out_tree->Branch("IsoTrack_SF_id_5perc_Down"    , "vector<float>", &IsoTrk_SF_id_5perc_Down    , 32000,0);
-			b_IsoTrk_SF_id_20perc 				= out_tree->Branch("IsoTrack_SF_id_20perc"     		, "vector<float>", &IsoTrk_SF_id_20perc 		   , 32000,0);
-			b_IsoTrk_SF_id_20perc_Up 			= out_tree->Branch("IsoTrack_SF_id_20perc_Up"     , "vector<float>", &IsoTrk_SF_id_20perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_id_20perc_Down 		= out_tree->Branch("IsoTrack_SF_id_20perc_Down"   , "vector<float>", &IsoTrk_SF_id_20perc_Down   , 32000,0);
-			b_IsoTrk_SF_id_50perc 				= out_tree->Branch("IsoTrack_SF_id_50perc"     		, "vector<float>", &IsoTrk_SF_id_50perc 		   , 32000,0);
-			b_IsoTrk_SF_id_50perc_Up 			= out_tree->Branch("IsoTrack_SF_id_50perc_Up"     , "vector<float>", &IsoTrk_SF_id_50perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_id_50perc_Down 		= out_tree->Branch("IsoTrack_SF_id_50perc_Down"   , "vector<float>", &IsoTrk_SF_id_50perc_Down   , 32000,0);
+		b_IsoTrk_SF_id_5perc					= out_tree->Branch("IsoTrack_SF_id_5perc"     		, "vector<float>", &IsoTrk_SF_id_5perc			   , 32000,0);
+		b_IsoTrk_SF_id_5perc_Up 			= out_tree->Branch("IsoTrack_SF_id_5perc_Up"     	, "vector<float>", &IsoTrk_SF_id_5perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_id_5perc_Down 		= out_tree->Branch("IsoTrack_SF_id_5perc_Down"    , "vector<float>", &IsoTrk_SF_id_5perc_Down    , 32000,0);
+		b_IsoTrk_SF_id_20perc 				= out_tree->Branch("IsoTrack_SF_id_20perc"     		, "vector<float>", &IsoTrk_SF_id_20perc 		   , 32000,0);
+		b_IsoTrk_SF_id_20perc_Up 			= out_tree->Branch("IsoTrack_SF_id_20perc_Up"     , "vector<float>", &IsoTrk_SF_id_20perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_id_20perc_Down 		= out_tree->Branch("IsoTrack_SF_id_20perc_Down"   , "vector<float>", &IsoTrk_SF_id_20perc_Down   , 32000,0);
+		b_IsoTrk_SF_id_50perc 				= out_tree->Branch("IsoTrack_SF_id_50perc"     		, "vector<float>", &IsoTrk_SF_id_50perc 		   , 32000,0);
+		b_IsoTrk_SF_id_50perc_Up 			= out_tree->Branch("IsoTrack_SF_id_50perc_Up"     , "vector<float>", &IsoTrk_SF_id_50perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_id_50perc_Down 		= out_tree->Branch("IsoTrack_SF_id_50perc_Down"   , "vector<float>", &IsoTrk_SF_id_50perc_Down   , 32000,0);
 
-			b_IsoTrk_SF_ES_5perc 					= out_tree->Branch("IsoTrack_SF_ES_5perc"     		, "vector<float>", &IsoTrk_SF_ES_5perc 			   , 32000,0);
-			b_IsoTrk_SF_ES_5perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_5perc_Up"     	, "vector<float>", &IsoTrk_SF_ES_5perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_ES_5perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_5perc_Down"    , "vector<float>", &IsoTrk_SF_ES_5perc_Down    , 32000,0);
-			b_IsoTrk_SF_ES_20perc 				= out_tree->Branch("IsoTrack_SF_ES_20perc"     		, "vector<float>", &IsoTrk_SF_ES_20perc 		   , 32000,0);
-			b_IsoTrk_SF_ES_20perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_20perc_Up"     , "vector<float>", &IsoTrk_SF_ES_20perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_ES_20perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_20perc_Down"   , "vector<float>", &IsoTrk_SF_ES_20perc_Down   , 32000,0);
-			b_IsoTrk_SF_ES_50perc 				= out_tree->Branch("IsoTrack_SF_ES_50perc"     		, "vector<float>", &IsoTrk_SF_ES_50perc 		   , 32000,0);
-			b_IsoTrk_SF_ES_50perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_50perc_Up"     , "vector<float>", &IsoTrk_SF_ES_50perc_Up 	   , 32000,0);
-			b_IsoTrk_SF_ES_50perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_50perc_Down"   , "vector<float>", &IsoTrk_SF_ES_50perc_Down   , 32000,0);
+		b_IsoTrk_SF_ES_5perc 					= out_tree->Branch("IsoTrack_SF_ES_5perc"     		, "vector<float>", &IsoTrk_SF_ES_5perc 			   , 32000,0);
+		b_IsoTrk_SF_ES_5perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_5perc_Up"     	, "vector<float>", &IsoTrk_SF_ES_5perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_ES_5perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_5perc_Down"    , "vector<float>", &IsoTrk_SF_ES_5perc_Down    , 32000,0);
+		b_IsoTrk_SF_ES_20perc 				= out_tree->Branch("IsoTrack_SF_ES_20perc"     		, "vector<float>", &IsoTrk_SF_ES_20perc 		   , 32000,0);
+		b_IsoTrk_SF_ES_20perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_20perc_Up"     , "vector<float>", &IsoTrk_SF_ES_20perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_ES_20perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_20perc_Down"   , "vector<float>", &IsoTrk_SF_ES_20perc_Down   , 32000,0);
+		b_IsoTrk_SF_ES_50perc 				= out_tree->Branch("IsoTrack_SF_ES_50perc"     		, "vector<float>", &IsoTrk_SF_ES_50perc 		   , 32000,0);
+		b_IsoTrk_SF_ES_50perc_Up 			= out_tree->Branch("IsoTrack_SF_ES_50perc_Up"     , "vector<float>", &IsoTrk_SF_ES_50perc_Up 	   , 32000,0);
+		b_IsoTrk_SF_ES_50perc_Down 		= out_tree->Branch("IsoTrack_SF_ES_50perc_Down"   , "vector<float>", &IsoTrk_SF_ES_50perc_Down   , 32000,0);
 
-			b_LHEScaleWeight_0 						= out_tree->Branch("LHEScaleWeight_Zero"   	, &val_LHEScaleWeight_0   		, "LHEScaleWeight_Zero/F");
-			b_LHEScaleWeight_1 						= out_tree->Branch("LHEScaleWeight_One"   	, &val_LHEScaleWeight_1   		, "LHEScaleWeight_One/F");
-			b_LHEScaleWeight_2 						= out_tree->Branch("LHEScaleWeight_Two"   	, &val_LHEScaleWeight_2   		, "LHEScaleWeight_Two/F");
-			b_LHEScaleWeight_3 						= out_tree->Branch("LHEScaleWeight_Three"  	, &val_LHEScaleWeight_3   		, "LHEScaleWeight_Three/F");
-			b_LHEScaleWeight_4 						= out_tree->Branch("LHEScaleWeight_Four"   	, &val_LHEScaleWeight_4   		, "LHEScaleWeight_Four/F");
-			b_LHEScaleWeight_5 						= out_tree->Branch("LHEScaleWeight_Five"   	, &val_LHEScaleWeight_5   		, "LHEScaleWeight_Five/F");
-			b_LHEScaleWeight_6 						= out_tree->Branch("LHEScaleWeight_Six"   	, &val_LHEScaleWeight_6   		, "LHEScaleWeight_Six/F");
-			b_LHEScaleWeight_7 						= out_tree->Branch("LHEScaleWeight_Seven"  	, &val_LHEScaleWeight_7   		, "LHEScaleWeight_Seven/F");
-			b_LHEScaleWeight_8 						= out_tree->Branch("LHEScaleWeight_Eight"  	, &val_LHEScaleWeight_8   		, "LHEScaleWeight_Eight/F");
-
-			b_LHEPdfWeight_Unit 					= out_tree->Branch("LHEPdfWeight_Unit"   		, &LHEPdfWeight_Unit   		, "LHEPdfWeight_Unit/F");
-			b_LHEPdfWeight_Up 						= out_tree->Branch("LHEPdfWeight_Up"   			, &LHEPdfWeight_Up   			, "LHEPdfWeight_Up/F");
-			b_LHEPdfWeight_Down 					= out_tree->Branch("LHEPdfWeight_Down"   		, &LHEPdfWeight_Down   		, "LHEPdfWeight_Down/F");
-		}
 
     for( unsigned int loop_event = 0; loop_event < out_tree->GetEntriesFast(); ++loop_event) {
 
@@ -679,7 +637,6 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  	 		t_run			= run();
  	 		t_lumiBlock		= luminosityBlock();
  	 		t_event			= event();
-			t_eft_weight		= eft_weight();
 			if (isData){
 				t_MET_pt		= MET_pt();
 				t_MET_phi		= MET_phi();
@@ -691,80 +648,46 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  	 		t_weight		= weight;
 
 			//Load Tau SFs
-			if ( !isData ){
-				Tau_sfDeepTau2017v2p1VSjet_Loose_ext  		=  Tau_sfDeepTau2017v2p1VSjet_Loose()  	;
-				Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSjet_LooseUp()  	;
-				Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext  =  Tau_sfDeepTau2017v2p1VSjet_LooseDown()  	;
-				Tau_sfDeepTau2017v2p1VSmu_VLoose_ext  		=  Tau_sfDeepTau2017v2p1VSmu_VLoose()  	;
-				Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSmu_VLooseUp()  	;
-				Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSmu_VLooseDown()  	;
-				Tau_sfDeepTau2017v2p1VSe_VVLoose_ext  		=  Tau_sfDeepTau2017v2p1VSe_VVLoose()  	;
-				Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSe_VVLooseUp()  	;
-				Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSe_VVLooseDown()  	;
+			Tau_sfDeepTau2017v2p1VSjet_Loose_ext  		=  Tau_sfDeepTau2017v2p1VSjet_Loose()  	;
+			Tau_sfDeepTau2017v2p1VSjet_LooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSjet_LooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSjet_LooseDown_ext  =  Tau_sfDeepTau2017v2p1VSjet_LooseDown()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLoose_ext  		=  Tau_sfDeepTau2017v2p1VSmu_VLoose()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSmu_VLooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSmu_VLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSmu_VLooseDown()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLoose_ext  		=  Tau_sfDeepTau2017v2p1VSe_VVLoose()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLooseUp_ext  	=  Tau_sfDeepTau2017v2p1VSe_VVLooseUp()  	;
+			Tau_sfDeepTau2017v2p1VSe_VVLooseDown_ext  =  Tau_sfDeepTau2017v2p1VSe_VVLooseDown()  	;
 
-				//Load IsoTrack SFs
-				vector<float> sf_isotrk_unity( nIsoTrack(), 1.);
+			//Load IsoTrack SFs
+			vector<float> sf_isotrk_unity( nIsoTrack(), 1.);
 
-				IsoTrk_SF_id_5perc			= sf_isotrk_unity;	
-				IsoTrk_SF_id_20perc 		= sf_isotrk_unity;	
-				IsoTrk_SF_id_50perc 		= sf_isotrk_unity;	
-				IsoTrk_SF_ES_5perc 			= sf_isotrk_unity;	
-				IsoTrk_SF_ES_20perc 		= sf_isotrk_unity;	
-				IsoTrk_SF_ES_50perc 		= sf_isotrk_unity;	
+			IsoTrk_SF_id_5perc			= sf_isotrk_unity;	
+			IsoTrk_SF_id_20perc 		= sf_isotrk_unity;	
+			IsoTrk_SF_id_50perc 		= sf_isotrk_unity;	
+			IsoTrk_SF_ES_5perc 			= sf_isotrk_unity;	
+			IsoTrk_SF_ES_20perc 		= sf_isotrk_unity;	
+			IsoTrk_SF_ES_50perc 		= sf_isotrk_unity;	
 
-				IsoTrk_SF_id_5perc_Up 	= sf_isotrk_unity;	 
-				IsoTrk_SF_id_20perc_Up	= sf_isotrk_unity;	 
-				IsoTrk_SF_id_50perc_Up	= sf_isotrk_unity;	 
-				IsoTrk_SF_ES_5perc_Up 	= sf_isotrk_unity;	 
-				IsoTrk_SF_ES_20perc_Up	= sf_isotrk_unity;	 
-				IsoTrk_SF_ES_50perc_Up	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_5perc_Up 	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_20perc_Up	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_50perc_Up	= sf_isotrk_unity;	 
+			IsoTrk_SF_ES_5perc_Up 	= sf_isotrk_unity;	 
+			IsoTrk_SF_ES_20perc_Up	= sf_isotrk_unity;	 
+			IsoTrk_SF_ES_50perc_Up	= sf_isotrk_unity;	 
 
-				IsoTrk_SF_id_5perc_Down 	= sf_isotrk_unity;	 
-				IsoTrk_SF_id_20perc_Down	= sf_isotrk_unity;	 
-				IsoTrk_SF_id_50perc_Down	= sf_isotrk_unity;	 			                        
-				IsoTrk_SF_ES_5perc_Down 	= sf_isotrk_unity;	 
-				IsoTrk_SF_ES_20perc_Down	= sf_isotrk_unity;	 
-				IsoTrk_SF_ES_50perc_Down	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_5perc_Down 	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_20perc_Down	= sf_isotrk_unity;	 
+			IsoTrk_SF_id_50perc_Down	= sf_isotrk_unity;	 			                        
+			IsoTrk_SF_ES_5perc_Down 	= sf_isotrk_unity;	 
+			IsoTrk_SF_ES_20perc_Down	= sf_isotrk_unity;	 
+			IsoTrk_SF_ES_50perc_Down	= sf_isotrk_unity;	 
 
-				val_LHEScaleWeight_0					= (Float_t)LHEScaleWeight()[0];
-				val_LHEScaleWeight_1					= (Float_t)LHEScaleWeight()[1];
-				val_LHEScaleWeight_2					= (Float_t)LHEScaleWeight()[2];
-				val_LHEScaleWeight_3					= (Float_t)LHEScaleWeight()[3];
-				val_LHEScaleWeight_4					= (Float_t)LHEScaleWeight()[4];
-				val_LHEScaleWeight_5					= (Float_t)LHEScaleWeight()[5];
-				val_LHEScaleWeight_6					= (Float_t)LHEScaleWeight()[6];
-				val_LHEScaleWeight_7					= (Float_t)LHEScaleWeight()[7];
-				val_LHEScaleWeight_8					= (Float_t)LHEScaleWeight()[8];
-
-				//Compute LHE PDF variations
-				LHEPdfWeight_Unit				= 1.;
-				Float_t pdf_delta				= -9;
-				Int_t 	nMem						= 100;
-				Float_t hess_unc 				= 0.;
-				//Float_t mc_unc 				= 0.;
-				Float_t as_unc					= 0.;
-
-				//Alpha Scale uncertainty, easy
-				as_unc = ( LHEPdfWeight()[102] - LHEPdfWeight()[101] ) / 2.;
-
-				//Compute Hessian uncertainty
-				for(unsigned int i=1; i<nMem+1;i++){
-					hess_unc += pow( LHEPdfWeight()[i] - 1, 2 );
-				}
-				hess_unc = TMath::Sqrt( hess_unc );
-
-				pdf_delta = TMath::Sqrt( pow( as_unc, 2) + pow(hess_unc, 2) );
-				LHEPdfWeight_Up				= 1.+pdf_delta;
-				LHEPdfWeight_Down			= 1.-pdf_delta;
-				
-			}
-
-      if ( t_eft_weight == -9 ){
-        t_weight = -99999;
-        fill_branches(isData);
-        continue;
-      }
- 	 		if ( proc != "Data" ) weight = t_eft_weight * scale_factor;
+ 			if ( ggf_samples && ( fabs(genWeight()) >= 0.5 ) ){
+ 	 			t_weight = -99999;
+ 				fill_branches();
+ 				continue;
+ 			}
+ 	 		if ( proc != "Data" ) weight = genWeight() * scale_factor;
 
  			//////////////////////////////////////////////////////////////////////////////////////////////
  			//////////////////////////////////////////////////////////////////////////////////////////////
@@ -782,14 +705,14 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  					&&	(	fabs(Photon_eta().at(i)) < 1.442 || fabs(Photon_eta().at(i)) > 1.566 )
  					&&	( Photon_r9().at(i) > 0.8 || Photon_chargedHadronIso().at(i) < 20 || Photon_chargedHadronIso().at(i) / Photon_pt().at(i) < 0.3 )
  					&&  ( Photon_isScEtaEB().at(i) || Photon_isScEtaEE().at(i) )
- 					&&    Photon_mvaID_WP90	().at(i)
+ 					&&    Photon_mvaID().at(i) > pho_idmva_cut
  					){
  						pho_cands.push_back(i);					
  						pho_pt_cands.push_back( Photon_pt().at(i) );					
  				}
  			}
  			if ( pho_cands.size() < 2 ){ 
- 				fill_branches(isData);
+ 				fill_branches();
  				continue;
  			}
  
@@ -800,32 +723,32 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  				if ( Photon_pt().at(pho_cands[i]) == pho_pt_cands[1] && Photon_pt().at(pho_cands[i]) > 25 ) gHidx[1]	= pho_cands[i];
  			}
  			if ( gHidx[0] < 0 || gHidx[1] < 0 ){
- 				fill_branches(isData);
+ 				fill_branches();
  				continue;
  			}
  
  		//di-photon selection
  		mgg = (float)(Photon_p4().at(gHidx[0]) + Photon_p4().at(gHidx[1]) ).M();
  		if ( mgg < mgg_lower || mgg > mgg_upper ){
- 			fill_branches(isData);
+ 			fill_branches();
  			continue;
  		}
  
  		//if ( (proc == "Data" || !resonant) && mgg > mgg_sideband_lower && mgg < mgg_sideband_upper ){
- 		//	fill_branches(isData);
+ 		//	fill_branches();
  		//	continue;
  		//}
  
  		//photon selection
  		if  (  ( Photon_pt().at(gHidx[0]) < pho_pt_cut 				|| Photon_pt().at(gHidx[1]) < pho_pt_cut ) 
  		  	|| ( Photon_pt().at(gHidx[0]) / mgg < lead_pt_mgg_cut 	|| Photon_pt().at(gHidx[1]) / mgg < sublead_pt_mgg_cut ) 
- 		  	|| ( !Photon_mvaID_WP90().at(gHidx[0]) 	|| !Photon_mvaID_WP90().at(gHidx[1])  ) 
+ 		  	|| ( Photon_mvaID().at(gHidx[0]) < pho_idmva_cut 			|| Photon_mvaID().at(gHidx[1]) < pho_idmva_cut ) 
  		  	|| ( Photon_electronVeto().at(gHidx[0]) < pho_eveto_cut 	|| Photon_electronVeto().at(gHidx[1]) < pho_eveto_cut ) 
  		  	|| ( fabs(Photon_eta().at(gHidx[0])) > pho_eta_cut 		|| fabs(Photon_eta().at(gHidx[1])) > pho_eta_cut ) 
  		  	|| ( fabs(Photon_eta().at(gHidx[0])) > trans_eta_low 		&& fabs(Photon_eta().at(gHidx[0])) < trans_eta_high ) 
  		  	|| ( fabs(Photon_eta().at(gHidx[1])) > trans_eta_low 		&& fabs(Photon_eta().at(gHidx[1])) < trans_eta_high ) 
  		){
- 			fill_branches(isData);
+ 			fill_branches();
  			continue;
  		}
  			
@@ -870,7 +793,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  				if ( !overlap ){
 					sel_taus.push_back(i);
 					//ADD Tau SFs for tau decay Mode 5,6
-					if ( ( Tau_decayMode()[i] == 5 || Tau_decayMode()[i] == 6 ) && !isData ){
+					if ( Tau_decayMode()[i] == 5 || Tau_decayMode()[i] == 6 ){
 						//Correction vs Jet
 						if ( Tau_genPartFlav()[i] == 5 ){
 							vector<float> jet_corr;
@@ -939,6 +862,8 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  		vector<int> sel_jets;
  			for(unsigned int i=0; i<nJet(); i++){
  				if (Jet_pt().at(i) > jet_pt && fabs(Jet_eta().at(i)) < jet_eta && Jet_neEmEF().at(i) < jet_neEmEF && Jet_neHEF().at(i) < jet_neHEF && Jet_chHEF()[i] > jet_chHEF && Jet_chEmEF()[i] < jet_chEmEF && (int)Jet_nConstituents()[i] > jet_nConstituents && deltaR( Jet_p4().at(i) , Photon_p4().at(gHidx[0]) ) > jet_dR_pho && deltaR( Jet_p4().at(i) , Photon_p4().at(gHidx[1]) ) > jet_dR_pho ){
+					//Apply PU jet id
+					if ( Jet_pt().at(i) < 50 && Jet_puId().at(i) == 0 ) continue;
  
  					bool overlap = false;
  					for (unsigned int j=0; j<sel_eles.size(); j++){
@@ -999,7 +924,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
   			}
   		}
   		if ( Z_cand ){
- 			fill_branches(isData);
+ 			fill_branches();
  			continue;
  		}
  
@@ -1020,7 +945,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
   		h_cand2			= raw_results[5];
  
   		if ( h_cand1[1] == -1 && h_cand2[1] == -1  ){
- 			fill_branches(isData);
+ 			fill_branches();
  			continue;
  		}
  
@@ -1409,7 +1334,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
  			m_llg_subl	= ( lep1_p4 + lep2_p4 + Photon_p4().at(gHidx[1]) ).M();
  		}
   		if ( fabs( m_llg_lead - mZ ) < mllg_window | fabs( m_llg_subl - mZ ) < mllg_window  ){
- 			fill_branches(isData);
+ 			fill_branches();
  			continue;
  		}
  
@@ -1438,7 +1363,7 @@ int ScanChain( TChain *ch, string proc, string str_year, string date, float scal
   		//if ( cat7 ) h_mgg_1t0l_iso->Fill( mgg, weight );
   		//if ( cat8 ) h_mgg_1t0l->Fill( mgg, weight );
 
- 		fill_branches(isData);	
+ 		fill_branches();	
  } // Event loop
 	f1->cd();
 	f1->Write();
