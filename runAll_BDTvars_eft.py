@@ -11,11 +11,11 @@ r.gSystem.Load('NanoCORE/libTauAnalysis_ClassicSVfit.so')
 r.gSystem.Load('loopers/loop_add_BDT_vars_EFT_C.so')
 
 lumi = { "2016" : 16.51, "2016_APV" : 19.39, "2017" : 41.5, "2018" : 59.8 }
-years = ['2016', '2016_APV', '2017', '2018']
-#years = ['2016']
+#years = ['2016', '2016_APV', '2017', '2018']
+years = ['2018']
 samples = {}
 
-date="18May2022_eft"
+date="22Mar2023_eft"
 base_dir='/ceph/cms/store/user/fsetti/c++_looper_ul_output/'
 os.system("mkdir -p %s/%s/"%(base_dir,date))
 #os.system("mkdir -p %s/%s/hadded"%(base_dir,date))
@@ -23,14 +23,17 @@ os.system("mkdir -p %s/%s/"%(base_dir,date))
 with open('samples_and_scale1fb_ul_eft.json', "r") as f_in:
 	samples = json.load(f_in)
 
+#processes = [ 'ggTauTau', 'dilep', 'semilept' ] 
+process = 'semilept'
 
 for name, sample in samples.items()[:]:
 
-	if "ggTauTau" not in name:
+	if process not in name:
 		continue
 
 	os.system("mkdir -p %s/%s/%s"%(base_dir,date,name))
 	for year in years:
+		os.system("rm %s/%s/%s/*2018.root"%(base_dir,date,name))
 		print 'Start processing ', year, ' ' , str(name)
 		ch = r.TChain("Events")
 		list_of_files = []
